@@ -1,0 +1,46 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="ahmedBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fbbf24;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="ahmedSkin" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#d4a574;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#c19653;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background Circle -->
+  <circle cx="32" cy="32" r="32" fill="url(#ahmedBg)"/>
+  
+  <!-- Face -->
+  <circle cx="32" cy="26" r="11" fill="url(#ahmedSkin)"/>
+  
+  <!-- Hair (short, professional) -->
+  <path d="M21 19 C21 14, 26 11, 32 11 C38 11, 43 14, 43 19 C43 17, 40 15, 32 15 C24 15, 21 17, 21 19 Z" fill="#2d1b0e"/>
+  
+  <!-- Beard -->
+  <path d="M25 28 C25 32, 28 35, 32 35 C36 35, 39 32, 39 28 C39 30, 36 32, 32 32 C28 32, 25 30, 25 28 Z" fill="#2d1b0e"/>
+  
+  <!-- Body -->
+  <path d="M32 37 C20 37, 14 42, 14 52 L14 64 L50 64 L50 52 C50 42, 44 37, 32 37 Z" fill="url(#ahmedSkin)"/>
+  
+  <!-- Shirt -->
+  <path d="M32 37 C20 37, 14 42, 14 52 L14 64 L50 64 L50 52 C50 42, 44 37, 32 37 Z" fill="#059669"/>
+  
+  <!-- Eyes -->
+  <circle cx="28" cy="24" r="2" fill="#1f2937"/>
+  <circle cx="36" cy="24" r="2" fill="#1f2937"/>
+  <circle cx="28.5" cy="23.5" r="0.5" fill="#ffffff"/>
+  <circle cx="36.5" cy="23.5" r="0.5" fill="#ffffff"/>
+  
+  <!-- Eyebrows -->
+  <path d="M26 21 L30 20" stroke="#2d1b0e" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M34 20 L38 21" stroke="#2d1b0e" stroke-width="1.5" stroke-linecap="round"/>
+  
+  <!-- Nose -->
+  <ellipse cx="32" cy="27" rx="1" ry="1.5" fill="#b8956a"/>
+  
+  <!-- Smile -->
+  <path d="M28 30 Q32 33 36 30" stroke="#1f2937" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+</svg>

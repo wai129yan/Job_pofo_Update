@@ -1,0 +1,28 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="avatarGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="faceGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fbbf24;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f59e0b;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background Circle -->
+  <circle cx="24" cy="24" r="24" fill="url(#avatarGradient)"/>
+  
+  <!-- Face -->
+  <circle cx="24" cy="20" r="8" fill="url(#faceGradient)"/>
+  
+  <!-- Body -->
+  <path d="M24 28 C16 28, 12 32, 12 40 L12 48 L36 48 L36 40 C36 32, 32 28, 24 28 Z" fill="url(#faceGradient)"/>
+  
+  <!-- Eyes -->
+  <circle cx="21" cy="18" r="1.5" fill="#1f2937"/>
+  <circle cx="27" cy="18" r="1.5" fill="#1f2937"/>
+  
+  <!-- Smile -->
+  <path d="M20 22 Q24 25 28 22" stroke="#1f2937" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+</svg>
