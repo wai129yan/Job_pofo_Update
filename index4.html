@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WaiYan's Portfolio | Web Developer & DevOps Engineer</title>
+    <meta name="description" content="WaiYan's portfolio – Web Developer & DevOps Engineer">
+    <meta name="author" content="WaiYan">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, rgba(42, 38, 104, 0.9) 5%, rgba(68, 50, 124, 0.85) 25%, rgba(99, 58, 130, 0.8) 35%, rgba(62, 82, 107, 0.9) 50%, rgba(15, 23, 42, 0.95) 80%);
+            backdrop-filter: blur(5px);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        @keyframes gradientShift {
+
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+
+            25% {
+                background-position: 100% 50%;
+            }
+
+            50% {
+                background-position: 0% 100%;
+            }
+
+            75% {
+                background-position: 100% 0%;
+            }
+        }
+
+        .parallax-bg {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .team-card:hover .team-overlay {
+            opacity: 1;
+        }
+
+        .team-overlay {
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .stats-counter {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Modern Typography System - Poppins + Inter */
+        .hero-title {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -0.025em;
+        }
+
+        .section-title {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+
+        .card-title {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            line-height: 1.3;
+            letter-spacing: -0.015em;
+        }
+
+        .body-text {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            line-height: 1.6;
+            letter-spacing: -0.01em;
+        }
+
+        .stats-text {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        /* Enhanced Typography Styles */
+        .text-enhanced {
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .lead-text {
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            line-height: 1.7;
+            letter-spacing: -0.015em;
+        }
+
+        .button-text {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+        }
+
+        .timeline-item {
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, #667eea, #764ba2);
+            transform: translateX(-50%);
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            top: 2rem;
+            width: 16px;
+            height: 16px;
+            background: #667eea;
+            border: 4px solid white;
+            border-radius: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.2);
+        }
+
+        .value-icon {
+            transition: all 0.3s ease;
+        }
+
+        .value-card:hover .value-icon {
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        .breadcrumb-arrow::after {
+            content: '>';
+            margin: 0 8px;
+            color: #9CA3AF;
+        }
+
+        .breadcrumb-arrow:last-child::after {
+            display: none;
+        }
+
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .shape {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .shape:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .shape:nth-child(2) {
+            top: 60%;
+            right: 10%;
+            animation-delay: 2s;
+        }
+
+        .shape:nth-child(3) {
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+            }
+        }
+
+        .testimonial-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .social-icon {
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-3px) scale(1.1);
+        }
+
+        .milestone-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .milestone-card:nth-child(2) {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .milestone-card:nth-child(3) {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .milestone-card:nth-child(4) {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            color: #333;
+        }
+
+        @media (max-width: 768px) {
+            /* .timeline-item {
+                display: none;
+            } */
+
+            .timeline-item::before {
+                left: 2rem;
+                background: transparent;
+            }
+
+            .timeline-dot {
+                left: 2rem;
+            }
+
+            .stats-counter {
+                font-size: 2rem;
+            }
+        }
+
+        .intersection-observer {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .intersection-observer.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.7;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 min-h-screen text-enhanced" style="font-family: 'Inter', sans-serif;">
+
+
+    <!-- Breadcrumb -->
+    <div class="bg-white border-b">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <nav class="flex items-center text-sm">
+                <a href="#" class="breadcrumb-arrow text-gray-500 hover:text-gray-700">Welcome</a>
+                <span class="text-gray-900 font-medium">WaiYan's Portfolio</span>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg text-white py-20 relative overflow-hidden">
+        <div class="floating-shapes">
+            <div class="shape w-20 h-20 bg-white rounded-full"></div>
+            <div class="shape w-16 h-16 bg-white rounded-lg transform rotate-45"></div>
+            <div class="shape w-12 h-12 bg-white rounded-full"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <div class="max-w-4xl mx-auto">
+                <h1 class="text-5xl md:text-6xl font-bold mb-6 fade-in">
+                    Hi, I'm WaiYan —
+                    <span class="block text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-pink-300">
+                        Web Developer & DevOps
+                    </span>
+                </h1>
+                <p class="text-xl md:text-2xl text-purple-100 mb-8 max-w-3xl mx-auto fade-in-up">
+                    Welcome to my personal portfolio! I'm a dedicated Web Developer & DevOps enthusiast, passionate
+                    about building modern web applications and automating workflows. Here you'll find my projects,
+                    skills, and journey in tech.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center fade-in-up">
+                    <a href="#team"
+                        class="bg-white text-purple-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                        View My Work
+                    </a>
+                    <a href="#mission"
+                        class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-purple-600 transition-colors">
+                        My Mission as a Web Developer & DevOps
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div class="intersection-observer">
+                    <div class="stats-counter" data-target="17">0</div>
+                    <p class="text-gray-600 font-medium">Projects Completed</p>
+                </div>
+                <div class="intersection-observer">
+                    <div class="stats-counter" data-target="2">0</div>
+                    <p class="text-gray-600 font-medium">Years Experience</p>
+                </div>
+                <div class="intersection-observer">
+                    <div class="stats-counter" data-target="12">0</div>
+                    <p class="text-gray-600 font-medium">Tech Stacks Used</p>
+                </div>
+                <div class="intersection-observer">
+                    <div class="stats-counter" data-target="4">0</div>
+                    <p class="text-gray-600 font-medium">Certifications</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section id="mission"
+        class="py-24 bg-gradient-to-br from-gray-50 via-purple-50 to-pink-50 relative overflow-hidden">
+        <div class="absolute inset-0 pointer-events-none">
+            <div class="shape w-32 h-32 bg-purple-300 rounded-full opacity-20 absolute top-10 left-10"></div>
+            <div class="shape w-24 h-24 bg-pink-200 rounded-full opacity-20 absolute bottom-10 right-20"></div>
+            <div
+                class="shape w-20 h-20 bg-indigo-200 rounded-full opacity-20 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="intersection-observer">
+                    <h2 class="text-5xl font-extrabold mb-8 flex items-center gap-4">
+                        <span
+                            class="inline-block bg-gradient-to-r from-purple-600 via-pink-500 to-yellow-400 text-transparent bg-clip-text">My
+                            Mission</span>
+                        <svg class="w-10 h-10 text-purple-400 animate-pulse" fill="none" stroke="currentColor"
+                            stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M13 16h-1v-4h-1m4 4h-1a4 4 0 01-4-4V7a4 4 0 014-4h1a4 4 0 014 4v5a4 4 0 01-4 4z" />
+                        </svg>
+                    </h2>
+                    <p class="text-xl text-gray-700 mb-6 leading-relaxed">
+                        As a <span class="font-semibold text-purple-600">Web Developer</span> &amp; <span
+                            class="font-semibold text-pink-500">DevOps</span> enthusiast, I build secure, scalable, and
+                        maintainable web applications—while automating deployment and infrastructure for seamless
+                        delivery.
+                    </p>
+                    <p class="text-xl text-gray-700 mb-10 leading-relaxed">
+                        I focus on best practices, collaboration, and continuous improvement to deliver high-quality
+                        solutions and foster a culture of innovation in tech.
+                    </p>
+                    <ul class="space-y-5">
+                        <li class="flex items-center gap-4">
+                            <span
+                                class="inline-flex items-center justify-center w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-400 rounded-xl text-white shadow-lg text-xl">
+                                <i class="fas fa-code"></i>
+                            </span>
+                            <span class="text-gray-900 font-medium text-lg">Modern, maintainable web solutions</span>
+                        </li>
+                        <li class="flex items-center gap-4">
+                            <span
+                                class="inline-flex items-center justify-center w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-xl text-white shadow-lg text-xl">
+                                <i class="fas fa-rocket"></i>
+                            </span>
+                            <span class="text-gray-900 font-medium text-lg">Automated CI/CD &amp; cloud
+                                deployments</span>
+                        </li>
+                        <li class="flex items-center gap-4">
+                            <span
+                                class="inline-flex items-center justify-center w-10 h-10 bg-gradient-to-br from-green-500 to-teal-400 rounded-xl text-white shadow-lg text-xl">
+                                <i class="fas fa-users"></i>
+                            </span>
+                            <span class="text-gray-900 font-medium text-lg">Collaboration &amp; knowledge sharing</span>
+                        </li>
+                        <li class="flex items-center gap-4">
+                            <span
+                                class="inline-flex items-center justify-center w-10 h-10 bg-gradient-to-br from-yellow-400 to-orange-400 rounded-xl text-white shadow-lg text-xl">
+                                <i class="fas fa-lightbulb"></i>
+                            </span>
+                            <span class="text-gray-900 font-medium text-lg">Continuous improvement &amp;
+                                innovation</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="intersection-observer flex flex-col items-center gap-6 w-full sm:w-auto">
+                    <a href="./【kyaw wai yan】履歴書.docx" download
+                        class="group relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-purple-500 rounded-full shadow-md w-full sm:w-auto">
+                        <span
+                            class="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-purple-500 group-hover:translate-x-0 ease">
+                            <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                            </svg>
+                        </span>
+                        <span
+                            class="absolute flex items-center justify-center w-full h-full text-purple-500 transition-all duration-300 transform group-hover:translate-x-full ease text-sm sm:text-base">Download
+                            CV</span>
+                        <span class="relative invisible text-sm sm:text-base">Download CV</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 intersection-observer">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">My Core Values</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    As a Web Developer & DevOps enthusiast, these values drive my work and commitment to building
+                    reliable, innovative, and accessible solutions for everyone.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Value 1 -->
+                <div
+                    class="value-card card-hover bg-gradient-to-br from-purple-50 to-blue-50 p-8 rounded-xl text-center intersection-observer">
+                    <div
+                        class="value-icon w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-code text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Modern Development</h3>
+                    <p class="text-gray-600">
+                        I use the latest web technologies and best practices to build scalable, maintainable, and secure
+                        applications.
+                        I'm always eager to learn modern technologies and actively seek opportunities to apply them in
+                        practice.
+                    </p>
+                </div>
+
+                <!-- Value 2 -->
+                <div
+                    class="value-card card-hover bg-gradient-to-br from-green-50 to-teal-50 p-8 rounded-xl text-center intersection-observer">
+                    <div
+                        class="value-icon w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-cogs text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">DevOps Automation</h3>
+                    <p class="text-gray-600">
+                        I automate workflows and cloud deployments for fast, reliable delivery.
+                        Experienced with AWS EC2, S3 hosting, automated backups, and Docker for containerization and
+                        streamlined deployments.
+                    </p>
+                </div>
+
+                <!-- Value 3 -->
+                <div
+                    class="value-card card-hover bg-gradient-to-br from-yellow-50 to-orange-50 p-8 rounded-xl text-center intersection-observer">
+                    <div
+                        class="value-icon w-16 h-16 bg-yellow-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-users text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Collaboration</h3>
+                    <p class="text-gray-600">
+                        I believe in teamwork, open communication, and knowledge sharing to achieve the best results
+                        together.
+                        I have experience working not only with local Japanese teams but also with international teams
+                        from Vietnam, Indonesia, and India.
+                    </p>
+                </div>
+
+                <!-- Value 4 -->
+                <div
+                    class="value-card card-hover bg-gradient-to-br from-pink-50 to-red-50 p-8 rounded-xl text-center intersection-observer">
+                    <div
+                        class="value-icon w-16 h-16 bg-pink-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-shield-alt text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Security</h3>
+                    <p class="text-gray-600">
+                        Security is a core focus in every project I work on — from writing secure code to designing
+                        resilient infrastructure — to ensure reliable and trustworthy solutions.
+                    </p>
+                </div>
+
+                <!-- Value 5 -->
+                <div
+                    class="value-card card-hover bg-gradient-to-br from-indigo-50 to-purple-50 p-8 rounded-xl text-center intersection-observer">
+                    <div
+                        class="value-icon w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-lightbulb text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Continuous Learning</h3>
+                    <p class="text-gray-600">
+                        I’m dedicated to continuous learning, constantly exploring new tools and techniques to improve
+                        my skills and adapt to evolving technologies.
+                    </p>
+                </div>
+
+                <!-- Value 6 -->
+                <div
+                    class="value-card card-hover bg-gradient-to-br from-teal-50 to-cyan-50 p-8 rounded-xl text-center intersection-observer">
+                    <div
+                        class="value-icon w-16 h-16 bg-teal-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-rocket text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Impact</h3>
+                    <p class="text-gray-600">
+                        My goal is to deliver high-quality solutions that provide real value to both users and
+                        organizations, contributing to long-term success and trust.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="py-12 sm:py-16 md:py-20 bg-gray-100">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-8 sm:mb-12 md:mb-16 intersection-observer">
+                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">My Journey</h2>
+                <p class="text-lg sm:text-xl text-gray-600">
+                    A timeline of my growth as a Web Developer & DevOps enthusiast—from first lines of code to impactful
+                    projects and continuous learning.
+                </p>
+            </div>
+
+            <div class="space-y-8 sm:space-y-12">
+                <!-- Timeline Item 1 -->
+                <div class="timeline-item intersection-observer">
+                    <div class="timeline-dot hidden md:block"></div>
+                    <div class="grid md:grid-cols-2 gap-6 sm:gap-8 items-center">
+                        <div class="md:text-right order-2 md:order-1">
+                            <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-2">2021 - The Beginning</h3>
+                            <p class="text-sm sm:text-base text-gray-600 mb-4">
+                                I started my journey in web development, learning HTML, CSS, and JavaScript. My first
+                                project was a simple blog site where I shared my learning experiences, mostly learning
+                                from YouTube tutorials.
+                            </p>
+                            <div class="milestone-card p-3 sm:p-4 rounded-lg inline-block">
+                                <div class="text-xl sm:text-2xl font-bold">5</div>
+                                <div class="text-xs sm:text-sm">First Articles</div>
+                            </div>
+                        </div>
+                        <div class="order-1 md:order-2">
+                            <span
+                                class="text-gray-500 text-lg font-medium tracking-wide shadow-2xl px-4 py-4 rounded-full bg-gray-50 hover:bg-gray-100 transition-colors duration-300">2021
+                                Beginning</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 2 -->
+                <div class="timeline-item intersection-observer">
+                    <div class="timeline-dot hidden md:block"></div>
+                    <div class="grid md:grid-cols-2 gap-6 sm:gap-8 items-center">
+                        <div class="order-2 md:order-2">
+                            <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-2">2022 - Growing Community</h3>
+                            <p class="text-sm sm:text-base text-gray-600 mb-4">
+                                During this time, I attended a Web and IT college in Japan, learning both in the
+                                classroom and online from YouTube and teachers in my home country. This combination gave
+                                me a strong foundation and a wide range of knowledge in web development.
+                            </p>
+                            <div class="milestone-card p-3 sm:p-4 rounded-lg inline-block">
+                                <div class="text-xl sm:text-2xl font-bold">10K</div>
+                                <div class="text-xs sm:text-sm">Monthly Readers</div>
+                            </div>
+                        </div>
+                        <div class="order-1 md:order-1">
+                            <span
+                                class="text-gray-500 text-lg font-medium tracking-wide shadow-2xl px-4 py-4 rounded-full bg-gray-50 hover:bg-gray-100 transition-colors duration-300">2022
+                                Growth</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 3 -->
+                <div class="timeline-item intersection-observer">
+                    <div class="timeline-dot hidden md:block"></div>
+                    <div class="grid md:grid-cols-2 gap-6 sm:gap-8 items-center">
+                        <div class="md:text-right order-2 md:order-1">
+                            <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-2">2023 - Embracing Continuous
+                                Learning</h3>
+                            <p class="text-sm sm:text-base text-gray-600 mb-4">
+                                This year, I focused on continuous learning—exploring new technologies, frameworks, and
+                                best practices to stay current in the fast-evolving web and DevOps landscape. Embracing
+                                a growth mindset allowed me to adapt quickly and deliver better solutions for every
+                                project.
+                            </p>
+                            <div class="milestone-card p-3 sm:p-4 rounded-lg inline-block">
+                                <div class="text-xl sm:text-2xl font-bold">15</div>
+                                <div class="text-xs sm:text-sm">Expert Authors</div>
+                            </div>
+                        </div>
+                        <div class="order-1 md:order-2">
+                            <span
+                                class="text-gray-500 text-lg font-medium tracking-wide shadow-2xl px-4 py-4 rounded-full bg-gray-50 hover:bg-gray-100 transition-colors duration-300">2023
+                                Experts</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 4 -->
+                <div class="timeline-item intersection-observer">
+                    <div class="timeline-dot hidden md:block"></div>
+                    <div class="grid md:grid-cols-2 gap-6 sm:gap-8 items-center">
+                        <div class="order-2 md:order-2">
+                            <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-2">2024 - Global Reach</h3>
+                            <p class="text-sm sm:text-base text-gray-600 mb-4">
+                                In April 2024, I started working in Japan as a PHP Laravel developer, bridge engineer,
+                                and also took on project management responsibilities. This role allowed me to
+                                collaborate internationally, build robust web applications, manage projects, and connect
+                                teams across cultures and languages.
+                            </p>
+                            <div class="milestone-card p-3 sm:p-4 rounded-lg inline-block">
+                                <div class="text-xl sm:text-2xl font-bold">100K</div>
+                                <div class="text-xs sm:text-sm">Global Readers</div>
+                            </div>
+                        </div>
+                        <div class="order-1 md:order-1">
+                            <span
+                                class="text-gray-500 text-lg font-medium tracking-wide shadow-2xl px-4 py-4 rounded-full bg-gray-50 hover:bg-gray-100 transition-colors duration-300">2024
+                                Global</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 5 -->
+                <div class="timeline-item intersection-observer">
+                    <div class="timeline-dot hidden md:block"></div>
+                    <div class="grid md:grid-cols-2 gap-6 sm:gap-8 items-center">
+                        <div class="md:text-right order-2 md:order-1">
+                            <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-2">2025 - Innovation Hub</h3>
+                            <p class="text-sm sm:text-base text-gray-600 mb-4">
+                                I continue to stay curious and committed to learning, always seeking new challenges and
+                                opportunities to grow professionally as a web developer and DevOps engineer.
+                            </p>
+                            <div class="milestone-card p-3 sm:p-4 rounded-lg inline-block">
+                                <div class="text-xl sm:text-2xl font-bold">150K</div>
+                                <div class="text-xs sm:text-sm">Monthly Readers</div>
+                            </div>
+                        </div>
+                        <div class="order-1 md:order-2">
+                            <span
+                                class="text-gray-500 text-lg font-medium tracking-wide shadow-2xl px-4 py-4 rounded-full bg-gray-50 hover:bg-gray-100 transition-colors duration-300">2025
+                                Innovation</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-20 intersection-observer">
+                <span
+                    class="inline-block px-4 py-1 rounded-full bg-purple-100 text-purple-600 text-sm font-semibold mb-4">Portfolio</span>
+                <h2
+                    class="text-5xl font-extrabold text-gray-900 mb-6 bg-gradient-to-r from-purple-600 via-pink-500 to-indigo-600 bg-clip-text text-transparent">
+                    My Project Showcase
+                </h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto mb-8 rounded-full"></div>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                    Take a look at some of my recent projects that showcase my expertise in
+                    <span class="text-purple-600 font-semibold">web development</span> and
+                    <span class="text-pink-600 font-semibold">DevOps engineering</span>.
+                    From responsive web applications to infrastructure management, each project demonstrates my
+                    dedication to building
+                    <span class="italic">efficient</span>,
+                    <span class="italic">scalable</span>, and
+                    <span class="italic">innovative</span> solutions that deliver real business value.
+                </p>
+                <div class="flex justify-center gap-4 mt-8">
+                    <div class="w-2 h-2 rounded-full bg-purple-200 animate-pulse"></div>
+                    <div class="w-2 h-2 rounded-full bg-pink-200 animate-pulse delay-100"></div>
+                    <div class="w-2 h-2 rounded-full bg-indigo-200 animate-pulse delay-200"></div>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div
+                    class="team-card card-hover bg-white rounded-xl shadow-lg overflow-hidden relative intersection-observer">
+                    <img src="./imges/screen.png?height=300&width=300" alt="generate_QR"
+                        class="w-full h-64 object-cover">
+                    <div
+                        class="team-overlay absolute inset-0 bg-gradient-to-t from-purple-600 to-transparent flex items-end">
+                        <div class="p-6 text-white">
+                            <div class="flex space-x-4 mb-4">
+                                <a href="https://www.facebook.com/wai129yan" target="_blank"
+                                    class="social-icon text-white hover:text-yellow-300">
+                                    <i class="fab fa-facebook text-xl"></i>
+                                </a>
+                                <a href="https://www.linkedin.com/in/kyaw-wai-yan-467aaa351/" target="_blank"
+                                    class="social-icon text-white hover:text-yellow-300">
+                                    <i class="fab fa-linkedin text-xl"></i>
+                                </a>
+                                <a href="https://github.com/wai129yan?tab=repositories" target="_blank"
+                                    class="social-icon text-white hover:text-yellow-300">
+                                    <i class="fab fa-github text-xl"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">QR Code Generator</h3>
+                        <p class="text-purple-600 font-medium mb-3">Test QR</p>
+                        <p class="text-gray-600 text-sm">
+                            QR codes enable smartphone users to instantly access your website with a simple scan,
+                            providing a seamless and efficient way to connect with your digital presence.
+                        </p>
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            <span class="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded-full">JavaScript</span>
+                            <span class="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded-full">Html</span>
+                            <span class="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded-full">Css</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Member 2 -->
+                <div
+                    class="team-card card-hover bg-white rounded-xl shadow-lg overflow-hidden relative intersection-observer">
+                    <img src="./imges/woocommerce-pos-plugins-5-yith.jpg?height=300&width=300" alt=""
+                        class="w-full h-64 object-cover">
+                    <div
+                        class="team-overlay absolute inset-0 bg-gradient-to-t from-blue-600 to-transparent flex items-end">
+                        <div class="p-6 text-white">
+                            <div class="flex space-x-4 mb-4">
+                                <a href="https://www.facebook.com/wai129yan" target="_blank"
+                                    class="social-icon text-white hover:text-yellow-300">
+                                    <i class="fab fa-facebook text-xl"></i>
+                                </a>
+                                <a href="https://www.linkedin.com/in/kyaw-wai-yan-467aaa351/" target="_blank"
+                                    class="social-icon text-white hover:text-yellow-300">
+                                    <i class="fab fa-linkedin text-xl"></i>
+                                </a>
+                                <a href="https://github.com/wai129yan?tab=repositories" target="_blank"
+                                    class="social-icon text-white hover:text-yellow-300">
+                                    <i class="fab fa-github text-xl"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Shop POS</h3>
+                        <p class="text-blue-600 font-medium mb-3">Wordpress</p>
+                        <p class="text-gray-600 text-sm">
+                            I am an experienced WordPress developer specializing in PHP and plugin development. I am
+                            skilled in customizing themes,
+                            creating custom plugins, and implementing WooCommerce solutions for e-commerce platforms. I
+                            have a strong background in
+                            integrating payment gateways and optimizing WordPress performance.
+                        </p>
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">PHP</span>
+                            <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">Html</span>
+                            <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">Css</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Member 3 -->
+                <div
+                    class="team-card card-hover bg-white rounded-xl shadow-lg overflow-hidden relative intersection-observer">
+                    <img src="./imges/image (4).png?height=300&width=300" alt="" class="w-full h-64 object-cover"
+                        class="w-full h-64 object-cover">
+                    <div
+                        class="team-overlay absolute inset-0 bg-gradient-to-t from-green-600 to-transparent flex items-end">
+                        <div class="p-6 text-white">
+                            <div class="flex space-x-4 mb-4">
+                                <a href="https://www.facebook.com/wai129yan" target="_blank"
+                                    class="social-icon text-white hover:text-yellow-300">
+                                    <i class="fab fa-facebook text-xl"></i>
+                                </a>
+                                <a href="https://www.linkedin.com/in/kyaw-wai-yan-467aaa351/" target="_blank"
+                                    class="social-icon text-white hover:text-yellow-300">
+                                    <i class="fab fa-linkedin text-xl"></i>
+                                </a>
+                                <a href="https://github.com/wai129yan?tab=repositories" target="_blank"
+                                    class="social-icon text-white hover:text-yellow-300">
+                                    <i class="fab fa-github text-xl"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">
+                            <a href="https://github.com/wai129yan/inance" target="_blank" rel="noopener noreferrer"
+                                class="hover:text-purple-600 transition-colors">Inance</a>
+                        </h3>
+                        <p class="text-green-600 font-medium mb-3">Php</p>
+                        <p class="text-gray-600 text-sm">
+                            PHP-based job management system with pure PHP implementation for efficient workforce
+                            coordination and task tracking. Features include employee scheduling, time tracking, task
+                            assignments, and automated reporting capabilities. Built with a focus on security and
+                            scalability.
+                        </p>
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">PHP</span>
+                            <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Boostrap</span>
+                            <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Tailwind</span>
+                            <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Html | Css</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Member 4 -->
+                <div
+                    class="team-card card-hover bg-white rounded-xl shadow-lg overflow-hidden relative intersection-observer">
+                    <img src="./imges/typescriptTodo.png?height=300&width=300" alt="TypeScript Project"
+                        class="w-full h-64 object-cover">
+                    <div
+                        class="team-overlay absolute inset-0 bg-gradient-to-t from-blue-600 to-transparent flex items-end">
+                        <div class="p-6 text-white">
+                            <div class="flex space-x-4 mb-4">
+                                <a href="https://www.facebook.com/wai129yan" target="_blank"
+                                    class="social-icon text-white hover:text-yellow-300">
+                                    <i class="fab fa-facebook text-xl"></i>
+                                </a>
+                                <a href="https://www.linkedin.com/in/kyaw-wai-yan-467aaa351/" target="_blank"
+                                    class="social-icon text-white hover:text-yellow-300">
+                                    <i class="fab fa-linkedin text-xl"></i>
+                                </a>
+                                <a href="https://github.com/wai129yan?tab=repositories" target="_blank"
+                                    class="social-icon text-white hover:text-yellow-300">
+                                    <i class="fab fa-github text-xl"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">TypeScript Todo App</h3>
+                        <a href="https://typescript-todo-waiyan.netlify.app/" target="_blank"
+                            class="text-blue-600 font-medium mb-3">Learn More [+]</a>
+                        <p class="text-gray-600 text-sm">
+                            A fully typed Todo application built with TypeScript, featuring drag-and-drop functionality,
+                            state management, and strict type checking for enhanced code reliability.
+                        </p>
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">TypeScript</span>
+                            <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">React</span>
+                            <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">Drag & Drop</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Member 5 -->
+                <div
+                    class="team-card card-hover bg-white rounded-xl shadow-lg overflow-hidden relative intersection-observer">
+                    <img src="./imges/EC2-cut.png?height=300&width=300" alt="AWS Cloud & DevOps Project"
+                        class="w-full h-64 object-cover">
+                    <div
+                        class="team-overlay absolute inset-0 bg-gradient-to-t from-yellow-600 to-transparent flex items-end">
+                        <div class="p-6 text-white">
+                            <div class="flex space-x-4 mb-4">
+                                <a href="https://www.facebook.com/wai129yan" target="_blank"
+                                    class="social-icon text-white hover:text-yellow-300">
+                                    <i class="fab fa-facebook text-xl"></i>
+                                </a>
+                                <a href="https://www.linkedin.com/in/kyaw-wai-yan-467aaa351/" target="_blank"
+                                    class="social-icon text-white hover:text-yellow-300">
+                                    <i class="fab fa-linkedin text-xl"></i>
+                                </a>
+                                <a href="https://github.com/wai129yan?tab=repositories" target="_blank"
+                                    class="social-icon text-white hover:text-yellow-300">
+                                    <i class="fab fa-github text-xl"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <div class="space-y-2">
+                            <h3
+                                class="text-2xl font-bold text-gray-900 bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
+                                AWS Cloud & DevOps</h3>
+                            <p class="text-blue-600 font-semibold tracking-wide">Cloud Infrastructure Engineer</p>
+                            <p class="text-gray-700 text-sm font-medium leading-relaxed">
+                                Experienced in AWS services including EC2, Elastic Beanstalk, Lambda, ECS, S3, Route53
+                                and Docker containerization. Built scalable cloud architectures and automated
+                                deployments using CI/CD pipelines.
+                            </p>
+                        </div>
+                        <div class="flex flex-wrap gap-3">
+                            <span
+                                class="inline-flex items-center px-3 py-1.5 rounded-full bg-gradient-to-r from-yellow-100 to-yellow-50 text-yellow-800 text-xs font-medium shadow-sm">
+                                <i class="fab fa-aws mr-1"></i>AWS
+                            </span>
+                            <span
+                                class="inline-flex items-center px-3 py-1.5 rounded-full bg-gradient-to-r from-yellow-100 to-yellow-50 text-yellow-800 text-xs font-medium shadow-sm">
+                                <i class="fas fa-brain mr-1"></i>AI
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Member 6 -->
+                <div
+                    class="team-card card-hover bg-white rounded-xl shadow-lg overflow-hidden relative intersection-observer">
+                    <div class="relative">
+                        <img src="./imges/movie6.png?height=300&width=300" alt="React Mini Project"
+                            class="w-full h-64 object-cover transition-transform duration-300 hover:scale-105">
+
+                    </div>
+                    <div
+                        class="team-overlay absolute inset-0 bg-gradient-to-t from-indigo-600 to-transparent flex items-end opacity-0 transition-opacity duration-300">
+                        <div class="p-6 text-white">
+                            <div class="flex space-x-4 mb-4">
+                                <a href="https://www.facebook.com/wai129yan" target="_blank"
+                                    class="social-icon text-white hover:text-yellow-300">
+                                    <i class="fab fa-facebook text-xl"></i>
+                                </a>
+                                <a href="https://www.linkedin.com/in/kyaw-wai-yan-467aaa351/" target="_blank"
+                                    class="social-icon text-white hover:text-yellow-300">
+                                    <i class="fab fa-linkedin text-xl"></i>
+                                </a>
+                                <a href="https://github.com/wai129yan?tab=repositories" target="_blank"
+                                    class="social-icon text-white hover:text-yellow-300">
+                                    <i class="fab fa-github text-xl"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">React Mini Project</h3>
+                        <p class="text-indigo-600 font-medium mb-3">Frontend Development</p>
+                        <p class="text-gray-600 text-sm">
+                            A collection of React components and features including state management,
+                            routing, API integration, and responsive design.
+                        </p>
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            <span class="bg-indigo-100 text-indigo-800 text-xs px-2 py-1 rounded-full">React</span>
+                            <span class="bg-indigo-100 text-indigo-800 text-xs px-2 py-1 rounded-full">Redux</span>
+                            <span class="bg-indigo-100 text-indigo-800 text-xs px-2 py-1 rounded-full">Tailwind
+                                CSS</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-20 gradient-bg text-white relative overflow-hidden">
+        <div class="floating-shapes">
+            <div class="shape w-24 h-24 bg-white rounded-full"></div>
+            <div class="shape w-16 h-16 bg-white rounded-lg transform rotate-45"></div>
+            <div class="shape w-20 h-20 bg-white rounded-full"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16 intersection-observer">
+                <h2
+                    class="text-4xl md:text-5xl font-extrabold mb-4 bg-gradient-to-r from-yellow-300 via-pink-400 to-purple-400 bg-clip-text text-transparent">
+                    What People Say
+                </h2>
+                <p class="text-xl text-purple-100 max-w-2xl mx-auto">
+                    Real feedback from developers and clients on my web development and DevOps projects—collaboration,
+                    expertise, and impact.
+                </p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <!-- Testimonial 1 -->
+                <div
+                    class="testimonial-card p-8 rounded-2xl shadow-xl border border-white/20 flex flex-col items-center intersection-observer hover:scale-105 transition-transform duration-300">
+                    <div class="relative mb-4">
+                        <img src="./john-doe-avatar.svg" alt="John Doe"
+                            class="w-16 h-16 rounded-full border-4 border-purple-400 shadow-lg">
+                        <span
+                            class="absolute -bottom-2 -right-2 bg-gradient-to-br from-purple-500 to-pink-400 text-white rounded-full p-2 shadow-md">
+                            <i class="fas fa-quote-left"></i>
+                        </span>
+                    </div>
+                    <p class="text-lg text-purple-100 mb-6 text-center italic">
+                        “WaiYan’s portfolio inspired me to level up my skills. The code quality and DevOps automation
+                        are world-class.”
+                    </p>
+                    <div class="flex items-center gap-3 mb-2">
+                        <span class="font-semibold text-white">John Doe</span>
+                        <span class="text-purple-200 text-xs px-2 py-1 rounded-full bg-white/10">Frontend
+                            Developer</span>
+                    </div>
+                    <div class="flex text-yellow-400 mb-1">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                <!-- Testimonial 2 -->
+                <div
+                    class="testimonial-card p-8 rounded-2xl shadow-xl border border-white/20 flex flex-col items-center intersection-observer hover:scale-105 transition-transform duration-300">
+                    <div class="relative mb-4">
+                        <img src="./maria-garcia-avatar.svg" alt="Maria Garcia"
+                            class="w-16 h-16 rounded-full border-4 border-pink-400 shadow-lg">
+                        <span
+                            class="absolute -bottom-2 -right-2 bg-gradient-to-br from-pink-500 to-yellow-400 text-white rounded-full p-2 shadow-md">
+                            <i class="fas fa-quote-left"></i>
+                        </span>
+                    </div>
+                    <p class="text-lg text-purple-100 mb-6 text-center italic">
+                        “The deployment pipelines WaiYan built saved us hours every week. Communication and delivery
+                        were flawless.”
+                    </p>
+                    <div class="flex items-center gap-3 mb-2">
+                        <span class="font-semibold text-white">Maria Garcia</span>
+                        <span class="text-purple-200 text-xs px-2 py-1 rounded-full bg-white/10">Full Stack
+                            Developer</span>
+                    </div>
+                    <div class="flex text-yellow-400 mb-1">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                <!-- Testimonial 3 -->
+                <div
+                    class="testimonial-card p-8 rounded-2xl shadow-xl border border-white/20 flex flex-col items-center intersection-observer hover:scale-105 transition-transform duration-300">
+                    <div class="relative mb-4">
+                        <img src="./ahmed-hassan-avatar.svg" alt="Ahmed Hassan"
+                            class="w-16 h-16 rounded-full border-4 border-yellow-400 shadow-lg">
+                        <span
+                            class="absolute -bottom-2 -right-2 bg-gradient-to-br from-yellow-400 to-purple-400 text-white rounded-full p-2 shadow-md">
+                            <i class="fas fa-quote-left"></i>
+                        </span>
+                    </div>
+                    <p class="text-lg text-purple-100 mb-6 text-center italic">
+                        “From onboarding to launch, WaiYan’s expertise in both frontend and DevOps made our project a
+                        success.”
+                    </p>
+                    <div class="flex items-center gap-3 mb-2">
+                        <span class="font-semibold text-white">Ahmed Hassan</span>
+                        <span class="text-purple-200 text-xs px-2 py-1 rounded-full bg-white/10">Backend Engineer</span>
+                    </div>
+                    <div class="flex text-yellow-400 mb-1">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center intersection-observer">
+            <h2 class="text-4xl font-bold text-gray-900 mb-6">Let’s Work Together</h2>
+            <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+                Interested in collaborating, hiring, or discussing a project? I’m always open to new opportunities and
+                connections in web development and DevOps.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#contact"
+                    class="bg-purple-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-purple-700 transition-colors">
+                    Contact Me
+                </a>
+                <a href="#team"
+                    class="border-2 border-purple-600 text-purple-600 px-8 py-4 rounded-lg font-semibold hover:bg-purple-600 hover:text-white transition-colors">
+                    View My Projects
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section id="contact"
+        class="py-24 bg-gradient-to-br from-gray-900 via-indigo-900 to-purple-800 text-white relative overflow-hidden">
+        <div class="absolute inset-0 pointer-events-none">
+            <div class="shape w-56 h-56 bg-purple-900 rounded-full opacity-20 absolute -top-16 -left-16"></div>
+            <div class="shape w-40 h-40 bg-indigo-800 rounded-full opacity-10 absolute bottom-0 right-10"></div>
+            <div
+                class="shape w-28 h-28 bg-pink-800 rounded-full opacity-10 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            </div>
+        </div>
+        <div class="max-w-3xl mx-auto px-4 sm:px-8 text-center relative z-10">
+            <h2
+                class="text-5xl font-extrabold mb-6 bg-gradient-to-r from-indigo-300 via-purple-400 to-pink-400 bg-clip-text text-transparent drop-shadow-lg">
+                Get in Touch
+            </h2>
+            <p class="text-lg text-indigo-200 mb-10 max-w-2xl mx-auto">
+                Let's collaborate or connect! Fill out the form or email me at
+                <a href="mailto:kyawwaiyan641@gmail.com"
+                    class="text-indigo-300 text-2xl hover:text-indigo-100 transition">kyawwaiyan641@gmail.com</a>
+            </p>
+            <form
+                class="max-w-xl mx-auto flex flex-col gap-6 bg-white/10 backdrop-blur-xl p-10 rounded-3xl shadow-2xl border border-white/10">
+                <div class="flex gap-4 flex-col sm:flex-row">
+                    <input type="text" placeholder="Your Name" required
+                        class="flex-1 px-5 py-4 rounded-xl text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white/20 placeholder-gray-300 shadow-sm transition" />
+                    <input type="email" placeholder="Your Email" required
+                        class="flex-1 px-5 py-4 rounded-xl text-gray-100 focus:outline-none focus:ring-2 focus:ring-pink-400 bg-white/20 placeholder-gray-300 shadow-sm transition" />
+                </div>
+                <textarea placeholder="Your Message" rows="5" required
+                    class="px-5 py-4 rounded-xl text-gray-100 focus:outline-none focus:ring-2 focus:ring-purple-400 bg-white/20 placeholder-gray-300 shadow-sm transition"></textarea>
+                <button type="submit"
+                    class="w-full bg-gradient-to-r from-indigo-500 via-purple-600 to-pink-500 px-8 py-4 rounded-xl font-bold text-white shadow-lg hover:from-indigo-600 hover:to-pink-600 transition-all duration-200 tracking-wide text-lg">
+                    <span class="inline-flex items-center gap-2">
+                        <i class="fas fa-paper-plane animate-pulse"></i> Send Message
+                    </span>
+                </button>
+            </form>
+            <div class="flex justify-center gap-8 mt-10">
+                <a href="https://github.com/wai129yan?tab=repositories" target="_blank"
+                    class="social-icon text-white hover:text-indigo-300 text-3xl transition"><i
+                        class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/kyaw-wai-yan-467aaa351/" target="_blank"
+                    class="social-icon text-white hover:text-blue-400 text-3xl transition"><i
+                        class="fab fa-linkedin"></i></a>
+                <a href="mailto:kyawwaiyan641@gmail.com"
+                    class="social-icon text-white hover:text-pink-300 text-3xl transition"><i
+                        class="fas fa-envelope"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white py-12 border-t">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="md:col-span-2">
+                    <h3 class="text-2xl font-extrabold text-gray-900 mb-4">WaiYan's Portfolio</h3>
+                    <p class="text-gray-600 mb-6">
+                        Web Developer & DevOps engineer passionate about modern web apps, automation, and sharing
+                        knowledge.
+                    </p>
+
+                </div>
+                <div>
+                    <h4 class="font-semibold text-gray-900 mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#team" class="text-gray-600 hover:text-purple-600 transition-colors">Projects</a>
+                        </li>
+                        <li><a href="#mission" class="text-gray-600 hover:text-purple-600 transition-colors">Mission</a>
+                        </li>
+                        <li><a href="#contact" class="text-gray-600 hover:text-purple-600 transition-colors">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-gray-900 mb-4">Tech Stack</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-center gap-2 text-gray-600">
+                            <i class="fab fa-js-square text-yellow-400"></i>JavaScript / TypeScript
+                        </li>
+                        <li class="flex items-center gap-2 text-gray-600">
+                            <i class="fab fa-php text-indigo-500"></i>PHP | Laravel
+                        </li>
+                        <li class="flex items-center gap-2 text-gray-600">
+                            <i class="fab fa-react text-blue-400"></i>React
+                        </li>
+                        <li class="flex items-center gap-2 text-gray-600">
+                            <i class="fas fa-cloud text-purple-400"></i>Cloud & DevOps
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t mt-8 pt-8 text-center text-gray-600">
+                <p>&copy; 2025 | WaiYan's Portfolio. All rights reserved. Made with <span class="text-red-500"
+                        aria-label="love">❤️</span> for the developer community.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all elements with intersection-observer class
+        document.querySelectorAll('.intersection-observer').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Animated counters
+        function animateCounter(element, target, duration = 2000) {
+            let start = 0;
+            const increment = target / (duration / 16);
+
+            function updateCounter() {
+                start += increment;
+                if (start < target) {
+                    element.textContent = Math.floor(start).toLocaleString();
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    element.textContent = target.toLocaleString();
+                }
+            }
+
+            updateCounter();
+        }
+
+        // Start counters when they come into view
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counter = entry.target;
+                    const target = parseInt(counter.dataset.target);
+                    animateCounter(counter, target);
+                    counterObserver.unobserve(counter);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.stats-counter').forEach(counter => {
+            counterObserver.observe(counter);
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Parallax effect for hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.floating-shapes');
+
+            parallaxElements.forEach(element => {
+                const speed = 0.5;
+                element.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+
+        // Team card hover effects
+        document.querySelectorAll('.team-card').forEach(card => {
+            card.addEventListener('mouseenter', function () {
+                this.style.transform = 'translateY(-12px) scale(1.02)';
+            });
+
+            card.addEventListener('mouseleave', function () {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Newsletter form submission
+        document.querySelector('form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const email = this.querySelector('input[type="email"]').value;
+            if (email) {
+                // Show success message
+                const button = this.querySelector('button');
+                const originalText = button.textContent;
+                button.textContent = 'Subscribed!';
+                button.classList.add('bg-green-600');
+                button.classList.remove('bg-purple-600');
+
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.classList.remove('bg-green-600');
+                    button.classList.add('bg-purple-600');
+                    this.reset();
+                }, 2000);
+            }
+        });
+
+        // Add loading animation to page
+        window.addEventListener('load', () => {
+            document.body.classList.add('loaded');
+        });
+
+        // Mobile menu toggle (if needed)
+        const mobileMenuButton = document.querySelector('.md\\:hidden button');
+        if (mobileMenuButton) {
+            mobileMenuButton.addEventListener('click', function () {
+                // Add mobile menu functionality here
+                console.log('Mobile menu clicked');
+            });
+        }
+
+        // Add some interactive elements
+        document.querySelectorAll('.value-card').forEach(card => {
+            card.addEventListener('click', function () {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 150);
+            });
+        });
+
+        // Social media link tracking
+        document.querySelectorAll('.social-icon').forEach(link => {
+            link.addEventListener('click', function (e) {
+                // Allow default behavior for social links to work properly
+                const platform = this.querySelector('i').classList[1].split('-')[1];
+                // Add analytics tracking here if needed
+            });
+        });
+    </script>
+</body>
+
+</html>

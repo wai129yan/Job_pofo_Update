@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="html-root">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WaiYan's Portfolio | Web Developer & DevOps Engineer</title>
-    <meta name="description" content="WaiYan's portfolio – Web Developer & DevOps Engineer">
+    <title data-i18n="meta.title">WaiYan's Portfolio | Web Developer & DevOps Engineer</title>
+    <meta name="description" data-i18n="meta.description"
+        content="WaiYan's portfolio – Web Developer & DevOps Engineer">
     <meta name="author" content="WaiYan">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -14,7 +15,83 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
+
+    <!-- Language Toggle Styles -->
     <style>
+        .language-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .language-btn {
+            padding: 8px 16px;
+            border: none;
+            background: transparent;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .language-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .language-btn:not(.active) {
+            color: #666;
+        }
+
+        .language-btn:not(.active):hover {
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+        }
+
+        /* Loading animation for language switching */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(5px);
+            z-index: 9999;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Existing styles remain the same... */
         .gradient-bg {
             background: linear-gradient(135deg, rgba(42, 38, 104, 0.9) 5%, rgba(68, 50, 124, 0.85) 25%, rgba(99, 58, 130, 0.8) 35%, rgba(62, 82, 107, 0.9) 50%, rgba(15, 23, 42, 0.95) 80%);
             backdrop-filter: blur(5px);
@@ -284,6 +361,7 @@
         @media (max-width: 768px) {
             .timeline-item::before {
                 left: 2rem;
+                background: transparent;
             }
 
             .timeline-dot {
@@ -292,6 +370,17 @@
 
             .stats-counter {
                 font-size: 2rem;
+            }
+
+            .language-toggle {
+                top: 10px;
+                right: 10px;
+                padding: 6px;
+            }
+
+            .language-btn {
+                padding: 6px 12px;
+                font-size: 12px;
             }
         }
 
@@ -326,13 +415,28 @@
 
 <body class="bg-gray-50 min-h-screen text-enhanced" style="font-family: 'Inter', sans-serif;">
 
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Language Toggle -->
+    <div class="language-toggle">
+        <button class="language-btn active" data-lang="en" id="en-btn">
+            <i class="fas fa-globe-americas mr-1"></i>EN
+        </button>
+        <button class="language-btn" data-lang="ja" id="ja-btn">
+            <i class="fas fa-globe-asia mr-1"></i>日本語
+        </button>
+    </div>
 
     <!-- Breadcrumb -->
     <div class="bg-white border-b">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
             <nav class="flex items-center text-sm">
-                <a href="#" class="breadcrumb-arrow text-gray-500 hover:text-gray-700">Welcome</a>
-                <span class="text-gray-900 font-medium">WaiYan's Portfolio</span>
+                <a href="#" class="breadcrumb-arrow text-gray-500 hover:text-gray-700"
+                    data-i18n="breadcrumb.welcome">Welcome</a>
+                <span class="text-gray-900 font-medium" data-i18n="breadcrumb.title">WaiYan's Portfolio</span>
             </nav>
         </div>
     </div>
@@ -348,23 +452,26 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
             <div class="max-w-4xl mx-auto">
                 <h1 class="text-5xl md:text-6xl font-bold mb-6 fade-in">
-                    Hi, I'm WaiYan —
-                    <span class="block text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-pink-300">
+                    <span data-i18n="hero.greeting">Hi, I'm WaiYan —</span>
+                    <span class="block text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-pink-300"
+                        data-i18n="hero.title_part1">
                         Web Developer & DevOps
                     </span>
                 </h1>
-                <p class="text-xl md:text-2xl text-purple-100 mb-8 max-w-3xl mx-auto fade-in-up">
+                <p class="text-xl md:text-2xl text-purple-100 mb-8 max-w-3xl mx-auto fade-in-up" data-i18n="hero.intro">
                     Welcome to my personal portfolio! I'm a dedicated Web Developer & DevOps enthusiast, passionate
                     about building modern web applications and automating workflows. Here you'll find my projects,
                     skills, and journey in tech.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center fade-in-up">
                     <a href="#team"
-                        class="bg-white text-purple-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                        class="bg-white text-purple-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+                        data-i18n="hero.cta_work">
                         View My Work
                     </a>
                     <a href="#mission"
-                        class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-purple-600 transition-colors">
+                        class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-purple-600 transition-colors"
+                        data-i18n="hero.cta_mission">
                         My Mission as a Web Developer & DevOps
                     </a>
                 </div>
@@ -378,19 +485,19 @@
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
                 <div class="intersection-observer">
                     <div class="stats-counter" data-target="17">0</div>
-                    <p class="text-gray-600 font-medium">Projects Completed</p>
+                    <p class="text-gray-600 font-medium" data-i18n="stats.projects_completed">Projects Completed</p>
                 </div>
                 <div class="intersection-observer">
                     <div class="stats-counter" data-target="2">0</div>
-                    <p class="text-gray-600 font-medium">Years Experience</p>
+                    <p class="text-gray-600 font-medium" data-i18n="stats.years_experience">Years Experience</p>
                 </div>
                 <div class="intersection-observer">
                     <div class="stats-counter" data-target="12">0</div>
-                    <p class="text-gray-600 font-medium">Tech Stacks Used</p>
+                    <p class="text-gray-600 font-medium" data-i18n="stats.tech_stacks_used">Tech Stacks Used</p>
                 </div>
                 <div class="intersection-observer">
                     <div class="stats-counter" data-target="4">0</div>
-                    <p class="text-gray-600 font-medium">Certifications</p>
+                    <p class="text-gray-600 font-medium" data-i18n="stats.certifications">Certifications</p>
                 </div>
             </div>
         </div>
@@ -411,21 +518,21 @@
                 <div class="intersection-observer">
                     <h2 class="text-5xl font-extrabold mb-8 flex items-center gap-4">
                         <span
-                            class="inline-block bg-gradient-to-r from-purple-600 via-pink-500 to-yellow-400 text-transparent bg-clip-text">My
-                            Mission</span>
+                            class="inline-block bg-gradient-to-r from-purple-600 via-pink-500 to-yellow-400 text-transparent bg-clip-text"
+                            data-i18n="mission.title">My Mission</span>
                         <svg class="w-10 h-10 text-purple-400 animate-pulse" fill="none" stroke="currentColor"
                             stroke-width="2" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M13 16h-1v-4h-1m4 4h-1a4 4 0 01-4-4V7a4 4 0 014-4h1a4 4 0 014 4v5a4 4 0 01-4 4z" />
                         </svg>
                     </h2>
-                    <p class="text-xl text-gray-700 mb-6 leading-relaxed">
+                    <p class="text-xl text-gray-700 mb-6 leading-relaxed" data-i18n="mission.paragraph1">
                         As a <span class="font-semibold text-purple-600">Web Developer</span> &amp; <span
                             class="font-semibold text-pink-500">DevOps</span> enthusiast, I build secure, scalable, and
                         maintainable web applications—while automating deployment and infrastructure for seamless
                         delivery.
                     </p>
-                    <p class="text-xl text-gray-700 mb-10 leading-relaxed">
+                    <p class="text-xl text-gray-700 mb-10 leading-relaxed" data-i18n="mission.paragraph2">
                         I focus on best practices, collaboration, and continuous improvement to deliver high-quality
                         solutions and foster a culture of innovation in tech.
                     </p>
@@ -435,30 +542,32 @@
                                 class="inline-flex items-center justify-center w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-400 rounded-xl text-white shadow-lg text-xl">
                                 <i class="fas fa-code"></i>
                             </span>
-                            <span class="text-gray-900 font-medium text-lg">Modern, maintainable web solutions</span>
+                            <span class="text-gray-900 font-medium text-lg"
+                                data-i18n="mission.value_web_solutions">Modern, maintainable web solutions</span>
                         </li>
                         <li class="flex items-center gap-4">
                             <span
                                 class="inline-flex items-center justify-center w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-xl text-white shadow-lg text-xl">
                                 <i class="fas fa-rocket"></i>
                             </span>
-                            <span class="text-gray-900 font-medium text-lg">Automated CI/CD &amp; cloud
-                                deployments</span>
+                            <span class="text-gray-900 font-medium text-lg" data-i18n="mission.value_devops">Automated
+                                CI/CD &amp; cloud deployments</span>
                         </li>
                         <li class="flex items-center gap-4">
                             <span
                                 class="inline-flex items-center justify-center w-10 h-10 bg-gradient-to-br from-green-500 to-teal-400 rounded-xl text-white shadow-lg text-xl">
                                 <i class="fas fa-users"></i>
                             </span>
-                            <span class="text-gray-900 font-medium text-lg">Collaboration &amp; knowledge sharing</span>
+                            <span class="text-gray-900 font-medium text-lg"
+                                data-i18n="mission.value_collaboration">Collaboration &amp; knowledge sharing</span>
                         </li>
                         <li class="flex items-center gap-4">
                             <span
                                 class="inline-flex items-center justify-center w-10 h-10 bg-gradient-to-br from-yellow-400 to-orange-400 rounded-xl text-white shadow-lg text-xl">
                                 <i class="fas fa-lightbulb"></i>
                             </span>
-                            <span class="text-gray-900 font-medium text-lg">Continuous improvement &amp;
-                                innovation</span>
+                            <span class="text-gray-900 font-medium text-lg"
+                                data-i18n="mission.value_innovation">Continuous improvement &amp; innovation</span>
                         </li>
                     </ul>
                 </div>
@@ -474,9 +583,10 @@
                             </svg>
                         </span>
                         <span
-                            class="absolute flex items-center justify-center w-full h-full text-purple-500 transition-all duration-300 transform group-hover:translate-x-full ease text-sm sm:text-base">Download
+                            class="absolute flex items-center justify-center w-full h-full text-purple-500 transition-all duration-300 transform group-hover:translate-x-full ease text-sm sm:text-base"
+                            data-i18n="mission.download_cv">Download CV</span>
+                        <span class="relative invisible text-sm sm:text-base" data-i18n="mission.download_cv">Download
                             CV</span>
-                        <span class="relative invisible text-sm sm:text-base">Download CV</span>
                     </a>
                 </div>
             </div>
@@ -487,8 +597,8 @@
     <section class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 intersection-observer">
-                <h2 class="text-4xl font-bold text-gray-900 mb-4">My Core Values</h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4" data-i18n="values.title">My Core Values</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto" data-i18n="values.intro">
                     As a Web Developer & DevOps enthusiast, these values drive my work and commitment to building
                     reliable, innovative, and accessible solutions for everyone.
                 </p>
@@ -502,8 +612,9 @@
                         class="value-icon w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-6">
                         <i class="fas fa-code text-2xl text-white"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-4">Modern Development</h3>
-                    <p class="text-gray-600">
+                    <h3 class="text-xl font-bold text-gray-900 mb-4" data-i18n="values.modern_development.title">Modern
+                        Development</h3>
+                    <p class="text-gray-600" data-i18n="values.modern_development.description">
                         I use the latest web technologies and best practices to build scalable, maintainable, and secure
                         applications.
                         I'm always eager to learn modern technologies and actively seek opportunities to apply them in
@@ -518,8 +629,9 @@
                         class="value-icon w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
                         <i class="fas fa-cogs text-2xl text-white"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-4">DevOps Automation</h3>
-                    <p class="text-gray-600">
+                    <h3 class="text-xl font-bold text-gray-900 mb-4" data-i18n="values.devops_automation.title">DevOps
+                        Automation</h3>
+                    <p class="text-gray-600" data-i18n="values.devops_automation.description">
                         I automate workflows and cloud deployments for fast, reliable delivery.
                         Experienced with AWS EC2, S3 hosting, automated backups, and Docker for containerization and
                         streamlined deployments.
@@ -533,8 +645,9 @@
                         class="value-icon w-16 h-16 bg-yellow-600 rounded-full flex items-center justify-center mx-auto mb-6">
                         <i class="fas fa-users text-2xl text-white"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-4">Collaboration</h3>
-                    <p class="text-gray-600">
+                    <h3 class="text-xl font-bold text-gray-900 mb-4" data-i18n="values.collaboration.title">
+                        Collaboration</h3>
+                    <p class="text-gray-600" data-i18n="values.collaboration.description">
                         I believe in teamwork, open communication, and knowledge sharing to achieve the best results
                         together.
                         I have experience working not only with local Japanese teams but also with international teams
@@ -549,8 +662,8 @@
                         class="value-icon w-16 h-16 bg-pink-600 rounded-full flex items-center justify-center mx-auto mb-6">
                         <i class="fas fa-shield-alt text-2xl text-white"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-4">Security</h3>
-                    <p class="text-gray-600">
+                    <h3 class="text-xl font-bold text-gray-900 mb-4" data-i18n="values.security.title">Security</h3>
+                    <p class="text-gray-600" data-i18n="values.security.description">
                         Security is a core focus in every project I work on — from writing secure code to designing
                         resilient infrastructure — to ensure reliable and trustworthy solutions.
                     </p>
@@ -563,9 +676,10 @@
                         class="value-icon w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center mx-auto mb-6">
                         <i class="fas fa-lightbulb text-2xl text-white"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-4">Continuous Learning</h3>
-                    <p class="text-gray-600">
-                        I’m dedicated to continuous learning, constantly exploring new tools and techniques to improve
+                    <h3 class="text-xl font-bold text-gray-900 mb-4" data-i18n="values.continuous_learning.title">
+                        Continuous Learning</h3>
+                    <p class="text-gray-600" data-i18n="values.continuous_learning.description">
+                        I'm dedicated to continuous learning, constantly exploring new tools and techniques to improve
                         my skills and adapt to evolving technologies.
                     </p>
                 </div>
@@ -577,8 +691,8 @@
                         class="value-icon w-16 h-16 bg-teal-600 rounded-full flex items-center justify-center mx-auto mb-6">
                         <i class="fas fa-rocket text-2xl text-white"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-4">Impact</h3>
-                    <p class="text-gray-600">
+                    <h3 class="text-xl font-bold text-gray-900 mb-4" data-i18n="values.impact.title">Impact</h3>
+                    <p class="text-gray-600" data-i18n="values.impact.description">
                         My goal is to deliver high-quality solutions that provide real value to both users and
                         organizations, contributing to long-term success and trust.
                     </p>
@@ -591,8 +705,10 @@
     <section class="py-12 sm:py-16 md:py-20 bg-gray-100">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-8 sm:mb-12 md:mb-16 intersection-observer">
-                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">My Journey</h2>
-                <p class="text-lg sm:text-xl text-gray-600">
+                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-3 sm:mb-4" data-i18n="timeline.title">My
+                    Journey
+                </h2>
+                <p class="text-lg sm:text-xl text-gray-600" data-i18n="timeline.intro">
                     A timeline of my growth as a Web Developer & DevOps enthusiast—from first lines of code to impactful
                     projects and continuous learning.
                 </p>
@@ -604,15 +720,19 @@
                     <div class="timeline-dot hidden md:block"></div>
                     <div class="grid md:grid-cols-2 gap-6 sm:gap-8 items-center">
                         <div class="md:text-right order-2 md:order-1">
-                            <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-2">2021 - The Beginning</h3>
-                            <p class="text-sm sm:text-base text-gray-600 mb-4">
+                            <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-2"
+                                data-i18n="timeline.items.0.title">
+                                2021 - The Beginning</h3>
+                            <p class="text-sm sm:text-base text-gray-600 mb-4" data-i18n="timeline.items.0.description">
                                 I started my journey in web development, learning HTML, CSS, and JavaScript. My first
                                 project was a simple blog site where I shared my learning experiences, mostly learning
                                 from YouTube tutorials.
                             </p>
                             <div class="milestone-card p-3 sm:p-4 rounded-lg inline-block">
                                 <div class="text-xl sm:text-2xl font-bold">5</div>
-                                <div class="text-xs sm:text-sm">First Articles</div>
+                                <div class="text-xs sm:text-sm" data-i18n="timeline.items.0.milestone_label">First
+                                    Articles
+                                </div>
                             </div>
                         </div>
                         <div class="order-1 md:order-2">
@@ -628,15 +748,19 @@
                     <div class="timeline-dot hidden md:block"></div>
                     <div class="grid md:grid-cols-2 gap-6 sm:gap-8 items-center">
                         <div class="order-2 md:order-2">
-                            <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-2">2022 - Growing Community</h3>
-                            <p class="text-sm sm:text-base text-gray-600 mb-4">
+                            <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-2"
+                                data-i18n="timeline.items.1.title">
+                                2022 - Growing Community</h3>
+                            <p class="text-sm sm:text-base text-gray-600 mb-4" data-i18n="timeline.items.1.description">
                                 During this time, I attended a Web and IT college in Japan, learning both in the
                                 classroom and online from YouTube and teachers in my home country. This combination gave
                                 me a strong foundation and a wide range of knowledge in web development.
                             </p>
                             <div class="milestone-card p-3 sm:p-4 rounded-lg inline-block">
                                 <div class="text-xl sm:text-2xl font-bold">10K</div>
-                                <div class="text-xs sm:text-sm">Monthly Readers</div>
+                                <div class="text-xs sm:text-sm" data-i18n="timeline.items.1.milestone_label">Monthly
+                                    Readers
+                                </div>
                             </div>
                         </div>
                         <div class="order-1 md:order-1">
@@ -652,9 +776,10 @@
                     <div class="timeline-dot hidden md:block"></div>
                     <div class="grid md:grid-cols-2 gap-6 sm:gap-8 items-center">
                         <div class="md:text-right order-2 md:order-1">
-                            <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-2">2023 - Embracing Continuous
-                                Learning</h3>
-                            <p class="text-sm sm:text-base text-gray-600 mb-4">
+                            <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-2"
+                                data-i18n="timeline.items.2.title">
+                                2023 - Embracing Continuous Learning</h3>
+                            <p class="text-sm sm:text-base text-gray-600 mb-4" data-i18n="timeline.items.2.description">
                                 This year, I focused on continuous learning—exploring new technologies, frameworks, and
                                 best practices to stay current in the fast-evolving web and DevOps landscape. Embracing
                                 a growth mindset allowed me to adapt quickly and deliver better solutions for every
@@ -662,7 +787,9 @@
                             </p>
                             <div class="milestone-card p-3 sm:p-4 rounded-lg inline-block">
                                 <div class="text-xl sm:text-2xl font-bold">15</div>
-                                <div class="text-xs sm:text-sm">Expert Authors</div>
+                                <div class="text-xs sm:text-sm" data-i18n="timeline.items.2.milestone_label">Expert
+                                    Authors
+                                </div>
                             </div>
                         </div>
                         <div class="order-1 md:order-2">
@@ -678,8 +805,10 @@
                     <div class="timeline-dot hidden md:block"></div>
                     <div class="grid md:grid-cols-2 gap-6 sm:gap-8 items-center">
                         <div class="order-2 md:order-2">
-                            <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-2">2024 - Global Reach</h3>
-                            <p class="text-sm sm:text-base text-gray-600 mb-4">
+                            <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-2"
+                                data-i18n="timeline.items.3.title">
+                                2024 - Global Reach</h3>
+                            <p class="text-sm sm:text-base text-gray-600 mb-4" data-i18n="timeline.items.3.description">
                                 In April 2024, I started working in Japan as a PHP Laravel developer, bridge engineer,
                                 and also took on project management responsibilities. This role allowed me to
                                 collaborate internationally, build robust web applications, manage projects, and connect
@@ -687,7 +816,9 @@
                             </p>
                             <div class="milestone-card p-3 sm:p-4 rounded-lg inline-block">
                                 <div class="text-xl sm:text-2xl font-bold">100K</div>
-                                <div class="text-xs sm:text-sm">Global Readers</div>
+                                <div class="text-xs sm:text-sm" data-i18n="timeline.items.3.milestone_label">Global
+                                    Readers
+                                </div>
                             </div>
                         </div>
                         <div class="order-1 md:order-1">
@@ -703,14 +834,18 @@
                     <div class="timeline-dot hidden md:block"></div>
                     <div class="grid md:grid-cols-2 gap-6 sm:gap-8 items-center">
                         <div class="md:text-right order-2 md:order-1">
-                            <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-2">2025 - Innovation Hub</h3>
-                            <p class="text-sm sm:text-base text-gray-600 mb-4">
+                            <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-2"
+                                data-i18n="timeline.items.4.title">
+                                2025 - Innovation Hub</h3>
+                            <p class="text-sm sm:text-base text-gray-600 mb-4" data-i18n="timeline.items.4.description">
                                 I continue to stay curious and committed to learning, always seeking new challenges and
                                 opportunities to grow professionally as a web developer and DevOps engineer.
                             </p>
                             <div class="milestone-card p-3 sm:p-4 rounded-lg inline-block">
                                 <div class="text-xl sm:text-2xl font-bold">150K</div>
-                                <div class="text-xs sm:text-sm">Monthly Readers</div>
+                                <div class="text-xs sm:text-sm" data-i18n="timeline.items.4.milestone_label">Monthly
+                                    Readers
+                                </div>
                             </div>
                         </div>
                         <div class="order-1 md:order-2">
@@ -730,12 +865,12 @@
             <div class="text-center mb-20 intersection-observer">
                 <span
                     class="inline-block px-4 py-1 rounded-full bg-purple-100 text-purple-600 text-sm font-semibold mb-4">Portfolio</span>
-                <h2
-                    class="text-5xl font-extrabold text-gray-900 mb-6 bg-gradient-to-r from-purple-600 via-pink-500 to-indigo-600 bg-clip-text text-transparent">
+                <h2 class="text-5xl font-extrabold text-gray-900 mb-6 bg-gradient-to-r from-purple-600 via-pink-500 to-indigo-600 bg-clip-text text-transparent"
+                    data-i18n="projects.title">
                     My Project Showcase
                 </h2>
                 <div class="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto mb-8 rounded-full"></div>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed" data-i18n="projects.intro">
                     Take a look at some of my recent projects that showcase my expertise in
                     <span class="text-purple-600 font-semibold">web development</span> and
                     <span class="text-pink-600 font-semibold">DevOps engineering</span>.
@@ -800,7 +935,7 @@
                     <div
                         class="team-overlay absolute inset-0 bg-gradient-to-t from-blue-600 to-transparent flex items-end">
                         <div class="p-6 text-white">
-                             <div class="flex space-x-4 mb-4">
+                            <div class="flex space-x-4 mb-4">
                                 <a href="https://www.facebook.com/wai129yan" target="_blank"
                                     class="social-icon text-white hover:text-yellow-300">
                                     <i class="fab fa-facebook text-xl"></i>
@@ -842,7 +977,7 @@
                     <div
                         class="team-overlay absolute inset-0 bg-gradient-to-t from-green-600 to-transparent flex items-end">
                         <div class="p-6 text-white">
-                             <div class="flex space-x-4 mb-4">
+                            <div class="flex space-x-4 mb-4">
                                 <a href="https://www.facebook.com/wai129yan" target="_blank"
                                     class="social-icon text-white hover:text-yellow-300">
                                     <i class="fab fa-facebook text-xl"></i>
@@ -922,7 +1057,8 @@
                 <!-- Team Member 5 -->
                 <div
                     class="team-card card-hover bg-white rounded-xl shadow-lg overflow-hidden relative intersection-observer">
-                    <img src="./imges/EC2-cut.png?height=300&width=300" alt="AWS Cloud & DevOps Project" class="w-full h-64 object-cover">
+                    <img src="./imges/EC2-cut.png?height=300&width=300" alt="AWS Cloud & DevOps Project"
+                        class="w-full h-64 object-cover">
                     <div
                         class="team-overlay absolute inset-0 bg-gradient-to-t from-yellow-600 to-transparent flex items-end">
                         <div class="p-6 text-white">
@@ -1023,11 +1159,11 @@
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center mb-16 intersection-observer">
-                <h2
-                    class="text-4xl md:text-5xl font-extrabold mb-4 bg-gradient-to-r from-yellow-300 via-pink-400 to-purple-400 bg-clip-text text-transparent">
+                <h2 class="text-4xl md:text-5xl font-extrabold mb-4 bg-gradient-to-r from-yellow-300 via-pink-400 to-purple-400 bg-clip-text text-transparent"
+                    data-i18n="testimonials.title">
                     What People Say
                 </h2>
-                <p class="text-xl text-purple-100 max-w-2xl mx-auto">
+                <p class="text-xl text-purple-100 max-w-2xl mx-auto" data-i18n="testimonials.intro">
                     Real feedback from developers and clients on my web development and DevOps projects—collaboration,
                     expertise, and impact.
                 </p>
@@ -1123,18 +1259,20 @@
     <!-- CTA Section -->
     <section class="py-20 bg-white">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center intersection-observer">
-            <h2 class="text-4xl font-bold text-gray-900 mb-6">Let’s Work Together</h2>
-            <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-                Interested in collaborating, hiring, or discussing a project? I’m always open to new opportunities and
+            <h2 class="text-4xl font-bold text-gray-900 mb-6" data-i18n="cta.title">Let's Work Together</h2>
+            <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto" data-i18n="cta.intro">
+                Interested in collaborating, hiring, or discussing a project? I'm always open to new opportunities and
                 connections in web development and DevOps.
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
                 <a href="#contact"
-                    class="bg-purple-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-purple-700 transition-colors">
+                    class="bg-purple-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-purple-700 transition-colors"
+                    data-i18n="cta.cta_contact">
                     Contact Me
                 </a>
                 <a href="#team"
-                    class="border-2 border-purple-600 text-purple-600 px-8 py-4 rounded-lg font-semibold hover:bg-purple-600 hover:text-white transition-colors">
+                    class="border-2 border-purple-600 text-purple-600 px-8 py-4 rounded-lg font-semibold hover:bg-purple-600 hover:text-white transition-colors"
+                    data-i18n="cta.cta_projects">
                     View My Projects
                 </a>
             </div>
@@ -1152,29 +1290,35 @@
             </div>
         </div>
         <div class="max-w-3xl mx-auto px-4 sm:px-8 text-center relative z-10">
-            <h2
-                class="text-5xl font-extrabold mb-6 bg-gradient-to-r from-indigo-300 via-purple-400 to-pink-400 bg-clip-text text-transparent drop-shadow-lg">
+            <h2 class="text-5xl font-extrabold mb-6 bg-gradient-to-r from-indigo-300 via-purple-400 to-pink-400 bg-clip-text text-transparent drop-shadow-lg"
+                data-i18n="contact.title">
                 Get in Touch
             </h2>
             <p class="text-lg text-indigo-200 mb-10 max-w-2xl mx-auto">
-                Let's collaborate or connect! Fill out the form or email me at
+                <span data-i18n="contact.intro">Let's collaborate or connect! Fill out the form or email me at</span>
                 <a href="mailto:kyawwaiyan641@gmail.com"
-                    class="text-indigo-300 text-2xl hover:text-indigo-100 transition">kyawwaiyan641@gmail.com</a>
+                    class="text-indigo-300 text-2xl hover:text-indigo-100 transition"
+                    data-i18n="contact.email_address">kyawwaiyan641@gmail.com</a>
             </p>
             <form
                 class="max-w-xl mx-auto flex flex-col gap-6 bg-white/10 backdrop-blur-xl p-10 rounded-3xl shadow-2xl border border-white/10">
                 <div class="flex gap-4 flex-col sm:flex-row">
-                    <input type="text" placeholder="Your Name" required
+                    <input type="text" data-i18n-placeholder="contact.form.name_placeholder" placeholder="Your Name"
+                        required
                         class="flex-1 px-5 py-4 rounded-xl text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white/20 placeholder-gray-300 shadow-sm transition" />
-                    <input type="email" placeholder="Your Email" required
+                    <input type="email" data-i18n-placeholder="contact.form.email_placeholder" placeholder="Your Email"
+                        required
                         class="flex-1 px-5 py-4 rounded-xl text-gray-100 focus:outline-none focus:ring-2 focus:ring-pink-400 bg-white/20 placeholder-gray-300 shadow-sm transition" />
                 </div>
-                <textarea placeholder="Your Message" rows="5" required
+                <textarea data-i18n-placeholder="contact.form.message_placeholder" placeholder="Your Message" rows="5"
+                    required
                     class="px-5 py-4 rounded-xl text-gray-100 focus:outline-none focus:ring-2 focus:ring-purple-400 bg-white/20 placeholder-gray-300 shadow-sm transition"></textarea>
                 <button type="submit"
                     class="w-full bg-gradient-to-r from-indigo-500 via-purple-600 to-pink-500 px-8 py-4 rounded-xl font-bold text-white shadow-lg hover:from-indigo-600 hover:to-pink-600 transition-all duration-200 tracking-wide text-lg">
                     <span class="inline-flex items-center gap-2">
-                        <i class="fas fa-paper-plane animate-pulse"></i> Send Message
+                        <i class="fas fa-paper-plane animate-pulse"></i> <span
+                            data-i18n="contact.form.submit_button">Send
+                            Message</span>
                     </span>
                 </button>
             </form>
@@ -1197,50 +1341,692 @@
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid md:grid-cols-4 gap-8">
                 <div class="md:col-span-2">
-                    <h3 class="text-2xl font-extrabold text-gray-900 mb-4">WaiYan's Portfolio</h3>
-                    <p class="text-gray-600 mb-6">
+                    <h3 class="text-2xl font-extrabold text-gray-900 mb-4" data-i18n="footer.company_name">WaiYan's
+                        Portfolio</h3>
+                    <p class="text-gray-600 mb-6" data-i18n="footer.description">
                         Web Developer & DevOps engineer passionate about modern web apps, automation, and sharing
                         knowledge.
                     </p>
-
                 </div>
                 <div>
-                    <h4 class="font-semibold text-gray-900 mb-4">Quick Links</h4>
+                    <h4 class="font-semibold text-gray-900 mb-4" data-i18n="footer.quick_links_title">Quick Links</h4>
                     <ul class="space-y-2">
-                        <li><a href="#team" class="text-gray-600 hover:text-purple-600 transition-colors">Projects</a>
-                        </li>
-                        <li><a href="#mission" class="text-gray-600 hover:text-purple-600 transition-colors">Mission</a>
-                        </li>
-                        <li><a href="#contact" class="text-gray-600 hover:text-purple-600 transition-colors">Contact</a>
-                        </li>
+                        <li><a href="#team" class="text-gray-600 hover:text-purple-600 transition-colors"
+                                data-i18n="footer.quick_links_items.0">Projects</a></li>
+                        <li><a href="#mission" class="text-gray-600 hover:text-purple-600 transition-colors"
+                                data-i18n="footer.quick_links_items.1">Mission</a></li>
+                        <li><a href="#contact" class="text-gray-600 hover:text-purple-600 transition-colors"
+                                data-i18n="footer.quick_links_items.2">Contact</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="font-semibold text-gray-900 mb-4">Tech Stack</h4>
+                    <h4 class="font-semibold text-gray-900 mb-4" data-i18n="footer.tech_stack_title">Tech Stack</h4>
                     <ul class="space-y-2">
                         <li class="flex items-center gap-2 text-gray-600">
-                            <i class="fab fa-js-square text-yellow-400"></i>JavaScript / TypeScript
+                            <i class="fab fa-js-square text-yellow-400"></i><span
+                                data-i18n="footer.tech_stack_items.0">JavaScript / TypeScript</span>
                         </li>
                         <li class="flex items-center gap-2 text-gray-600">
-                            <i class="fab fa-php text-indigo-500"></i>PHP | Laravel
+                            <i class="fab fa-php text-indigo-500"></i><span data-i18n="footer.tech_stack_items.1">PHP |
+                                Laravel</span>
                         </li>
                         <li class="flex items-center gap-2 text-gray-600">
-                            <i class="fab fa-react text-blue-400"></i>React
+                            <i class="fab fa-react text-blue-400"></i><span
+                                data-i18n="footer.tech_stack_items.2">React</span>
                         </li>
                         <li class="flex items-center gap-2 text-gray-600">
-                            <i class="fas fa-cloud text-purple-400"></i>Cloud & DevOps
+                            <i class="fas fa-cloud text-purple-400"></i><span
+                                data-i18n="footer.tech_stack_items.3">Cloud &
+                                DevOps</span>
                         </li>
                     </ul>
                 </div>
             </div>
             <div class="border-t mt-8 pt-8 text-center text-gray-600">
-                <p>&copy; 2025 | WaiYan's Portfolio. All rights reserved. Made with <span class="text-red-500"
-                        aria-label="love">❤️</span> for the developer community.</p>
+                <p data-i18n="footer.copyright">&copy; 2025 | WaiYan's Portfolio. All rights reserved. Made with <span
+                        class="text-red-500" aria-label="love">❤️</span> for the developer community.</p>
             </div>
         </div>
     </footer>
 
+    <!-- Localization JavaScript -->
     <script>
+        // Localization System
+        class LocalizationManager {
+            constructor() {
+                this.currentLanguage = 'en';
+                this.translations = {};
+                this.loadingOverlay = document.getElementById('loadingOverlay');
+                this.init();
+            }
+
+            async init() {
+                // Load initial translations
+                await this.loadTranslations('en');
+                await this.loadTranslations('ja');
+
+                // Set up event listeners
+                this.setupEventListeners();
+
+                // Apply saved language preference
+                const savedLanguage = localStorage.getItem('preferred-language') || 'en';
+                if (savedLanguage !== 'en') {
+                    await this.changeLanguage(savedLanguage);
+                }
+            }
+
+            setupEventListeners() {
+                document.querySelectorAll('.language-btn').forEach(btn => {
+                    btn.addEventListener('click', async (e) => {
+                        const lang = e.target.getAttribute('data-lang');
+                        if (lang !== this.currentLanguage) {
+                            await this.changeLanguage(lang);
+                        }
+                    });
+                });
+            }
+
+            async loadTranslations(language) {
+                try {
+                    // Inline translations to avoid HTTP requests
+                    const translations = {
+                        en: {
+                            "meta": {
+                                "title": "WaiYan's Portfolio | Web Developer & DevOps Engineer",
+                                "description": "WaiYan's portfolio – Web Developer & DevOps Engineer"
+                            },
+                            "breadcrumb": {
+                                "welcome": "Welcome",
+                                "title": "WaiYan's Portfolio"
+                            },
+                            "hero": {
+                                "greeting": "Hi, I'm WaiYan —",
+                                "title_part1": "Web Developer & DevOps",
+                                "intro": "Welcome to my personal portfolio! I'm a dedicated Web Developer & DevOps enthusiast, passionate about building modern web applications and automating workflows. Here you'll find my projects, skills, and journey in tech.",
+                                "cta_work": "View My Work",
+                                "cta_mission": "My Mission as a Web Developer & DevOps"
+                            },
+                            "stats": {
+                                "projects_completed": "Projects Completed",
+                                "years_experience": "Years Experience",
+                                "tech_stacks_used": "Tech Stacks Used",
+                                "certifications": "Certifications"
+                            },
+                            "mission": {
+                                "title": "My Mission",
+                                "paragraph1": "As a Web Developer & DevOps enthusiast, I build secure, scalable, and maintainable web applications—while automating deployment and infrastructure for seamless delivery.",
+                                "paragraph2": "I focus on best practices, collaboration, and continuous improvement to deliver high-quality solutions and foster a culture of innovation in tech.",
+                                "value_web_solutions": "Modern, maintainable web solutions",
+                                "value_devops": "Automated CI/CD & cloud deployments",
+                                "value_collaboration": "Collaboration & knowledge sharing",
+                                "value_innovation": "Continuous improvement & innovation",
+                                "download_cv": "Download CV"
+                            },
+                            "values": {
+                                "title": "My Core Values",
+                                "intro": "As a Web Developer & DevOps enthusiast, these values drive my work and commitment to building reliable, innovative, and accessible solutions for everyone.",
+                                "modern_development": {
+                                    "title": "Modern Development",
+                                    "description": "I use the latest web technologies and best practices to build scalable, maintainable, and secure applications. I'm always eager to learn modern technologies and actively seek opportunities to apply them in practice."
+                                },
+                                "devops_automation": {
+                                    "title": "DevOps Automation",
+                                    "description": "I automate workflows and cloud deployments for fast, reliable delivery. Experienced with AWS EC2, S3 hosting, automated backups, and Docker for containerization and streamlined deployments."
+                                },
+                                "collaboration": {
+                                    "title": "Collaboration",
+                                    "description": "I believe in teamwork, open communication, and knowledge sharing to achieve the best results together. I have experience working not only with local Japanese teams but also with international teams from Vietnam, Indonesia, and India."
+                                },
+                                "security": {
+                                    "title": "Security",
+                                    "description": "Security is a core focus in every project I work on — from writing secure code to designing resilient infrastructure — to ensure reliable and trustworthy solutions."
+                                },
+                                "continuous_learning": {
+                                    "title": "Continuous Learning",
+                                    "description": "I'm dedicated to continuous learning, constantly exploring new tools and techniques to improve my skills and adapt to evolving technologies."
+                                },
+                                "impact": {
+                                    "title": "Impact",
+                                    "description": "My goal is to deliver high-quality solutions that provide real value to both users and organizations, contributing to long-term success and trust."
+                                }
+                            },
+                            "timeline": {
+                                "title": "My Journey",
+                                "intro": "A timeline of my growth as a Web Developer & DevOps enthusiast—from first lines of code to impactful projects and continuous learning.",
+                                "items": [
+                                    {
+                                        "title": "2021 - The Beginning",
+                                        "description": "I started my journey in web development, learning HTML, CSS, and JavaScript. My first project was a simple blog site where I shared my learning experiences, mostly learning from YouTube tutorials.",
+                                        "milestone_label": "First Articles"
+                                    },
+                                    {
+                                        "title": "2022 - Growing Community",
+                                        "description": "During this time, I attended a Web and IT college in Japan, learning both in the classroom and online from YouTube and teachers in my home country. This combination gave me a strong foundation and a wide range of knowledge in web development.",
+                                        "milestone_label": "Monthly Readers"
+                                    },
+                                    {
+                                        "title": "2023 - Embracing Continuous Learning",
+                                        "description": "This year, I focused on continuous learning—exploring new technologies, frameworks, and best practices to stay current in the fast-evolving web and DevOps landscape. Embracing a growth mindset allowed me to adapt quickly and deliver better solutions for every project.",
+                                        "milestone_label": "Expert Authors"
+                                    },
+                                    {
+                                        "title": "2024 - Global Reach",
+                                        "description": "In April 2024, I started working in Japan as a PHP Laravel developer, bridge engineer, and also took on project management responsibilities. This role allowed me to collaborate internationally, build robust web applications, manage projects, and connect teams across cultures and languages.",
+                                        "milestone_label": "Global Readers"
+                                    },
+                                    {
+                                        "title": "2025 - Innovation Hub",
+                                        "description": "I continue to stay curious and committed to learning, always seeking new challenges and opportunities to grow professionally as a web developer and DevOps engineer.",
+                                        "milestone_label": "Monthly Readers"
+                                    }
+                                ]
+                            },
+                            "projects": {
+                                "title": "My Project Showcase",
+                                "intro": "Take a look at some of my recent projects that showcase my expertise in web development and DevOps engineering. From responsive web applications to infrastructure management, each project demonstrates my dedication to building efficient, scalable, and innovative solutions that deliver real business value.",
+                                "items": [
+                                    {
+                                        "title": "QR Code Generator",
+                                        "tag": "Test QR",
+                                        "description": "QR codes enable smartphone users to instantly access your website with a simple scan, providing a seamless and efficient way to connect with your digital presence.",
+                                        "technologies": ["JavaScript", "Html", "Css"]
+                                    },
+                                    {
+                                        "title": "Shop POS",
+                                        "tag": "Wordpress",
+                                        "description": "I am an experienced WordPress developer specializing in PHP and plugin development. I am skilled in customizing themes, creating custom plugins, and implementing WooCommerce solutions for e-commerce platforms. I have a strong background in integrating payment gateways and optimizing WordPress performance.",
+                                        "technologies": ["PHP", "Html", "Css"]
+                                    },
+                                    {
+                                        "title": "Inance",
+                                        "tag": "Php",
+                                        "description": "PHP-based job management system with pure PHP implementation for efficient workforce coordination and task tracking. Features include employee scheduling, time tracking, task assignments, and automated reporting capabilities. Built with a focus on security and scalability.",
+                                        "technologies": ["PHP", "Boostrap", "Tailwind", "Html | Css"]
+                                    },
+                                    {
+                                        "title": "TypeScript Todo App",
+                                        "tag": "Learn More [+]",
+                                        "description": "A fully typed Todo application built with TypeScript, featuring drag-and-drop functionality, state management, and strict type checking for enhanced code reliability.",
+                                        "technologies": ["TypeScript", "React", "Drag & Drop"]
+                                    },
+                                    {
+                                        "title": "AWS Cloud & DevOps",
+                                        "tag": "Cloud Infrastructure Engineer",
+                                        "description": "Experienced in AWS services including EC2, Elastic Beanstalk, Lambda, ECS, S3, Route53 and Docker containerization. Built scalable cloud architectures and automated deployments using CI/CD pipelines.",
+                                        "technologies": ["AWS", "AI"]
+                                    },
+                                    {
+                                        "title": "React Mini Project",
+                                        "tag": "Frontend Development",
+                                        "description": "A collection of React components and features including state management, routing, API integration, and responsive design.",
+                                        "technologies": ["React", "Redux", "Tailwind CSS"]
+                                    }
+                                ]
+                            },
+                            "testimonials": {
+                                "title": "What People Say",
+                                "intro": "Real feedback from developers and clients on my web development and DevOps projects—collaboration, expertise, and impact.",
+                                "items": [
+                                    {
+                                        "quote": "WaiYan's portfolio inspired me to level up my skills. The code quality and DevOps automation are world-class.",
+                                        "name": "John Doe",
+                                        "role": "Frontend Developer"
+                                    },
+                                    {
+                                        "quote": "The deployment pipelines WaiYan built saved us hours every week. Communication and delivery were flawless.",
+                                        "name": "Maria Garcia",
+                                        "role": "Full Stack Developer"
+                                    },
+                                    {
+                                        "quote": "From onboarding to launch, WaiYan's expertise in both frontend and DevOps made our project a success.",
+                                        "name": "Ahmed Hassan",
+                                        "role": "Backend Engineer"
+                                    }
+                                ]
+                            },
+                            "cta": {
+                                "title": "Let's Work Together",
+                                "intro": "Interested in collaborating, hiring, or discussing a project? I'm always open to new opportunities and connections in web development and DevOps.",
+                                "cta_contact": "Contact Me",
+                                "cta_projects": "View My Projects"
+                            },
+                            "contact": {
+                                "title": "Get in Touch",
+                                "intro": "Let's collaborate or connect! Fill out the form or email me at",
+                                "email_address": "kyawwaiyan641@gmail.com",
+                                "form": {
+                                    "name_placeholder": "Your Name",
+                                    "email_placeholder": "Your Email",
+                                    "message_placeholder": "Your Message",
+                                    "submit_button": "Send Message"
+                                }
+                            },
+                            "footer": {
+                                "company_name": "WaiYan's Portfolio",
+                                "description": "Web Developer & DevOps engineer passionate about modern web apps, automation, and sharing knowledge.",
+                                "quick_links_title": "Quick Links",
+                                "quick_links_items": [
+                                    "Projects",
+                                    "Mission",
+                                    "Contact"
+                                ],
+                                "tech_stack_title": "Tech Stack",
+                                "tech_stack_items": [
+                                    "JavaScript / TypeScript",
+                                    "PHP | Laravel",
+                                    "React",
+                                    "Cloud & DevOps"
+                                ],
+                                "copyright": "2025 | WaiYan's Portfolio. All rights reserved. Made with ❤️ for the developer community."
+                            }
+                        },
+                        ja: {
+                            "meta": {
+                                "title": "WaiYan's Portfolio | Web Developer & DevOps Engineer",
+                                "description": "WaiYan'sポートフォリオ – Web Developer & DevOps Engineer"
+                            },
+                            "breadcrumb": {
+                                "welcome": "ようこそ",
+                                "title": "WaiYan's Portfolio"
+                            },
+                            "hero": {
+                                "greeting": "こんにちは、WaiYanです —",
+                                "title_part1": "Web Developer & DevOps",
+                                "intro": "私のパーソナルポートフォリオへようこそ！私は献身的なWeb Developer & DevOps愛好家で、モダンなWebアプリケーションの構築とワークフローの自動化に情熱を注いでいます。ここでは私のプロジェクト、スキル、そしてテクノロジーにおける旅をご覧いただけます。",
+                                "cta_work": "私の仕事を見る",
+                                "cta_mission": "Web Developer & DevOpsとしての私のミッション"
+                            },
+                            "stats": {
+                                "projects_completed": "完了プロジェクト数",
+                                "years_experience": "経験年数",
+                                "tech_stacks_used": "使用技術スタック",
+                                "certifications": "資格数"
+                            },
+                            "mission": {
+                                "title": "私のミッション",
+                                "paragraph1": "Web Developer & DevOps愛好家として、私は安全でスケーラブル、そして保守性の高いWebアプリケーションを構築し、同時にシームレスなデリバリーのためにデプロイメントとインフラストラクチャを自動化します。",
+                                "paragraph2": "私はベストプラクティス、コラボレーション、そして継続的な改善に重点を置き、高品質なソリューションを提供し、テクノロジーにおけるイノベーションの文化を育んでいます。",
+                                "value_web_solutions": "モダンで保守性の高いWebソリューション",
+                                "value_devops": "CI/CDとクラウドデプロイメントの自動化",
+                                "value_collaboration": "コラボレーションと知識共有",
+                                "value_innovation": "継続的な改善とイノベーション",
+                                "download_cv": "履歴書をダウンロード"
+                            },
+                            "values": {
+                                "title": "私のコアバリュー",
+                                "intro": "Web Developer & DevOps愛好家として、これらの価値観が私の仕事と、信頼性が高く革新的でアクセスしやすいソリューションを構築するというコミットメントを推進しています。",
+                                "modern_development": {
+                                    "title": "モダン開発",
+                                    "description": "最新のWebテクノロジーとベストプラクティスを使用して、スケーラブルで保守性が高く、安全なアプリケーションを構築します。常に最新技術を学ぶことに意欲的で、実践でそれらを応用する機会を積極的に探しています。"
+                                },
+                                "devops_automation": {
+                                    "title": "DevOps自動化",
+                                    "description": "迅速で信頼性の高いデリバリーのためにワークフローとクラウドデプロイメントを自動化します。AWS EC2、S3ホスティング、自動バックアップ、コンテナ化のためのDocker、そしてデプロイメントの効率化に経験があります。"
+                                },
+                                "collaboration": {
+                                    "title": "コラボレーション",
+                                    "description": "最良の結果を共に達成するため、チームワーク、オープンなコミュニケーション、そして知識共有を信じています。日本のローカルチームだけでなく、ベトナム、インドネシア、インドの国際的なチームとも仕事をした経験があります。"
+                                },
+                                "security": {
+                                    "title": "セキュリティ",
+                                    "description": "信頼性が高く、安全なソリューションを保証するために、セキュアなコードの記述から回復力のあるインフラストラクチャの設計まで、私が取り組むすべてのプロジェクトにおいてセキュリティは中核的な焦点です。"
+                                },
+                                "continuous_learning": {
+                                    "title": "継続学習",
+                                    "description": "スキルを向上させ、進化するテクノロジーに適応するために、常に新しいツールやテクニックを探求し、継続的な学習に専念しています。"
+                                },
+                                "impact": {
+                                    "title": "インパクト",
+                                    "description": "私の目標は、ユーザーと組織の両方に真の価値を提供する高品質なソリューションを提供し、長期的な成功と信頼に貢献することです。"
+                                }
+                            },
+                            "timeline": {
+                                "title": "私の歩み",
+                                "intro": "Web Developer & DevOps愛好家としての成長のタイムライン – 最初の一行のコードから、インパクトのあるプロジェクト、そして継続的な学習まで。",
+                                "items": [
+                                    {
+                                        "title": "2021年 - 始まり",
+                                        "description": "Web開発の旅を始め、HTML、CSS、JavaScriptを学びました。最初のプロジェクトは、主にYouTubeチュートリアルから学んだ学習経験を共有したシンプルなブログサイトでした。",
+                                        "milestone_label": "最初の記事"
+                                    },
+                                    {
+                                        "title": "2022年 - コミュニティの成長",
+                                        "description": "この時期、日本でWebおよびIT系の専門学校に通い、教室での学習と、YouTubeや母国の先生からのオンライン学習を両立させました。この組み合わせにより、Web開発における強固な基盤と幅広い知識を得ることができました。",
+                                        "milestone_label": "月間読者数"
+                                    },
+                                    {
+                                        "title": "2023年 - 継続学習の受容",
+                                        "description": "この年は、急速に進化するWebおよびDevOpsの状況に対応するために、新しいテクノロジー、フレームワーク、ベストプラクティスを探索することに焦点を当て、継続学習を追求しました。成長マインドセットを受け入れることで、迅速に適応し、すべてのプロジェクトでより良いソリューションを提供することができました。",
+                                        "milestone_label": "専門家著者"
+                                    },
+                                    {
+                                        "title": "2024年 - グローバルリーチ",
+                                        "description": "2024年4月、私は日本でPHP Laravelデベロッパー、ブリッジエンジニアとして働き始め、プロジェクト管理の責任も担いました。この役割により、国際的なコラボレーション、堅牢なWebアプリケーションの構築、プロジェクト管理、そして文化と言語を越えたチームの接続が可能になりました。",
+                                        "milestone_label": "グローバル読者"
+                                    },
+                                    {
+                                        "title": "2025年 - イノベーションハブ",
+                                        "description": "Web DeveloperおよびDevOpsエンジニアとして専門的に成長するために、常に好奇心を持ち続け、学習にコミットし、新しい挑戦と機会を求め続けています。",
+                                        "milestone_label": "月間読者数"
+                                    }
+                                ]
+                            },
+                            "projects": {
+                                "title": "プロジェクトショーケース",
+                                "intro": "Web開発とDevOpsエンジニアリングにおける私の専門知識を示す最近のプロジェクトをご覧ください。レスポンシブWebアプリケーションからインフラストラクチャ管理まで、各プロジェクトは効率的で、スケーラブル、かつ革新的なソリューションを構築し、真のビジネス価値を提供するという私の献身を実証しています。",
+                                "items": [
+                                    {
+                                        "title": "QRコードジェネレータ",
+                                        "tag": "QRテスト",
+                                        "description": "QRコードにより、スマートフォンユーザーは簡単なスキャンで即座にあなたのウェブサイトにアクセスでき、デジタルプレゼンスとのシームレスで効率的な接続方法を提供します。",
+                                        "technologies": ["JavaScript", "Html", "Css"]
+                                    },
+                                    {
+                                        "title": "ショップPOS",
+                                        "tag": "Wordpress",
+                                        "description": "私はPHPとプラグイン開発を専門とする経験豊富なWordPressデベロッパーです。テーマのカスタマイズ、カスタムプラグインの作成、eコマースプラットフォーム向けのWooCommerceソリューションの実装に熟練しています。決済ゲートウェイの統合とWordPressパフォーマンスの最適化において強力な背景を持っています。",
+                                        "technologies": ["PHP", "Html", "Css"]
+                                    },
+                                    {
+                                        "title": "Inance",
+                                        "tag": "Php",
+                                        "description": "効率的な労働力の調整とタスクトラッキングのための純粋なPHP実装によるPHPベースの作業管理システム。従業員のスケジューリング、時間追跡、タスクの割り当て、自動化されたレポート機能が含まれます。セキュリティとスケーラビリティに重点を置いて構築されています。",
+                                        "technologies": ["PHP", "Boostrap", "Tailwind", "Html | Css"]
+                                    },
+                                    {
+                                        "title": "TypeScript Todoアプリ",
+                                        "tag": "詳細を見る [+]",
+                                        "description": "TypeScriptで構築された完全にタイプ化されたTodoアプリケーション。ドラッグアンドドロップ機能、状態管理、コードの信頼性向上のための厳密な型チェックを特徴としています。",
+                                        "technologies": ["TypeScript", "React", "ドラッグ&ドロップ"]
+                                    },
+                                    {
+                                        "title": "AWS Cloud & DevOps",
+                                        "tag": "クラウドインフラストラクチャエンジニア",
+                                        "description": "EC2、Elastic Beanstalk、Lambda、ECS、S3、Route53およびDockerコンテナ化を含むAWSサービスの経験があります。CI/CDパイプラインを使用してスケーラブルなクラウドアーキテクチャを構築し、デプロイメントを自動化しました。",
+                                        "technologies": ["AWS", "AI"]
+                                    },
+                                    {
+                                        "title": "React ミニプロジェクト",
+                                        "tag": "フロントエンド開発",
+                                        "description": "状態管理、ルーティング、API統合、レスポンシブデザインを含むReactコンポーネントと機能のコレクション。",
+                                        "technologies": ["React", "Redux", "Tailwind CSS"]
+                                    }
+                                ]
+                            },
+                            "testimonials": {
+                                "title": "お客様の声",
+                                "intro": "私のWeb開発とDevOpsプロジェクトに対するデベロッパーやクライアントからの本物のフィードバック - コラボレーション、専門知識、そしてインパクト。",
+                                "items": [
+                                    {
+                                        "quote": "WaiYanのポートフォリオは私のスキルをレベルアップするインスピレーションを与えました。コード品質とDevOps自動化は世界クラスです。",
+                                        "name": "John Doe",
+                                        "role": "フロントエンドデベロッパー"
+                                    },
+                                    {
+                                        "quote": "WaiYanが構築したデプロイメントパイプラインは毎週何時間もの節約になりました。コミュニケーションとデリバリーは完璧でした。",
+                                        "name": "Maria Garcia",
+                                        "role": "フルスタックデベロッパー"
+                                    },
+                                    {
+                                        "quote": "オンボーディングからローンチまで、フロントエンドとDevOpsの両方におけるWaiYanの専門知識が私たちのプロジェクトを成功に導きました。",
+                                        "name": "Ahmed Hassan",
+                                        "role": "バックエンドエンジニア"
+                                    }
+                                ]
+                            },
+                            "cta": {
+                                "title": "一緒に働きましょう",
+                                "intro": "コラボレーション、採用、またはプロジェクトについてのご相談に興味はありませんか？私はWeb開発とDevOpsにおける新しい機会と関係性に常にオープンです。",
+                                "cta_contact": "お問い合わせ",
+                                "cta_projects": "私のプロジェクトを見る"
+                            },
+                            "contact": {
+                                "title": "お問い合わせ",
+                                "intro": "コラボレーションや接続をしましょう！フォームに記入するか、メールでお問い合わせください：",
+                                "email_address": "kyawwaiyan641@gmail.com",
+                                "form": {
+                                    "name_placeholder": "お名前",
+                                    "email_placeholder": "メールアドレス",
+                                    "message_placeholder": "メッセージ",
+                                    "submit_button": "メッセージを送信"
+                                }
+                            },
+                            "footer": {
+                                "company_name": "WaiYan's Portfolio",
+                                "description": "モダンなWebアプリ、自動化、そして知識共有に情熱を注ぐWeb Developer & DevOpsエンジニア。",
+                                "quick_links_title": "クイックリンク",
+                                "quick_links_items": [
+                                    "プロジェクト",
+                                    "ミッション",
+                                    "お問い合わせ"
+                                ],
+                                "tech_stack_title": "技術スタック",
+                                "tech_stack_items": [
+                                    "JavaScript / TypeScript",
+                                    "PHP | Laravel",
+                                    "React",
+                                    "Cloud & DevOps"
+                                ],
+                                "copyright": "2025 | WaiYan's Portfolio. All rights reserved. ❤️で開発者コミュニティのために作られました。"
+                            }
+                        }
+                    };
+
+                    this.translations[language] = translations[language];
+                } catch (error) {
+                    console.error(`Failed to load translations for ${language}:`, error);
+                }
+            }
+
+            async changeLanguage(language) {
+                if (this.currentLanguage === language) return;
+
+                this.showLoading();
+
+                // Update language buttons
+                document.querySelectorAll('.language-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                    if (btn.getAttribute('data-lang') === language) {
+                        btn.classList.add('active');
+                    }
+                });
+
+                // Apply translations
+                this.applyTranslations(language);
+
+                // Update HTML lang attribute
+                document.getElementById('html-root').setAttribute('lang', language);
+
+                // Save preference
+                localStorage.setItem('preferred-language', language);
+                this.currentLanguage = language;
+
+                // Hide loading after a short delay for smooth transition
+                setTimeout(() => {
+                    this.hideLoading();
+                }, 500);
+            }
+
+            applyTranslations(language) {
+                const translations = this.translations[language];
+                if (!translations) return;
+
+                // Apply text content translations
+                document.querySelectorAll('[data-i18n]').forEach(element => {
+                    const key = element.getAttribute('data-i18n');
+                    const translation = this.getNestedProperty(translations, key);
+                    if (translation) {
+                        element.textContent = translation;
+                    }
+                });
+
+                // Apply placeholder translations
+                document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
+                    const key = element.getAttribute('data-i18n-placeholder');
+                    const translation = this.getNestedProperty(translations, key);
+                    if (translation) {
+                        element.setAttribute('placeholder', translation);
+                    }
+                });
+
+                // Update title and meta description
+                if (translations.meta) {
+                    if (translations.meta.title) {
+                        document.title = translations.meta.title;
+                    }
+                    if (translations.meta.description) {
+                        const metaDesc = document.querySelector('meta[name="description"]');
+                        if (metaDesc) {
+                            metaDesc.setAttribute('content', translations.meta.description);
+                        }
+                    }
+                }
+
+                // Update dynamic content
+                this.updateProjects(translations);
+                this.updateTestimonials(translations);
+            }
+
+            updateProjects(translations) {
+                const projectsContainer = document.getElementById('projects-container');
+                if (!projectsContainer || !translations.projects || !translations.projects.items) return;
+
+                const projectImages = [
+                    './imges/screen.png',
+                    './imges/woocommerce-pos-plugins-5-yith.jpg',
+                    './imges/image (4).png',
+                    './imges/typescriptTodo.png',
+                    './imges/EC2-cut.png',
+                    './imges/movie6.png'
+                ];
+
+                const projectLinks = [
+                    null, null, 'https://github.com/wai129yan/inance',
+                    'https://typescript-todo-waiyan.netlify.app/',
+                    null, null
+                ];
+
+                const gradientColors = [
+                    'from-purple-600 to-transparent',
+                    'from-blue-600 to-transparent',
+                    'from-green-600 to-transparent',
+                    'from-blue-600 to-transparent',
+                    'from-yellow-600 to-transparent',
+                    'from-indigo-600 to-transparent'
+                ];
+
+                projectsContainer.innerHTML = translations.projects.items.map((project, index) => `
+                    <div class="team-card card-hover bg-white rounded-xl shadow-lg overflow-hidden relative intersection-observer">
+                        <img src="${projectImages[index]}?height=300&width=300" alt="${project.title}"
+                            class="w-full h-64 object-cover">
+                        <div class="team-overlay absolute inset-0 bg-gradient-to-t ${gradientColors[index]} flex items-end">
+                            <div class="p-6 text-white">
+                                <div class="flex space-x-4 mb-4">
+                                    <a href="https://www.facebook.com/wai129yan" target="_blank"
+                                        class="social-icon text-white hover:text-yellow-300">
+                                        <i class="fab fa-facebook text-xl"></i>
+                                    </a>
+                                    <a href="https://www.linkedin.com/in/kyaw-wai-yan-467aaa351/" target="_blank"
+                                        class="social-icon text-white hover:text-yellow-300">
+                                        <i class="fab fa-linkedin text-xl"></i>
+                                    </a>
+                                    <a href="https://github.com/wai129yan?tab=repositories" target="_blank"
+                                        class="social-icon text-white hover:text-yellow-300">
+                                        <i class="fab fa-github text-xl"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">
+                                ${projectLinks[index] ?
+                        `<a href="${projectLinks[index]}" target="_blank" rel="noopener noreferrer" class="hover:text-purple-600 transition-colors">${project.title}</a>` :
+                        project.title
+                    }
+                            </h3>
+                            <p class="text-purple-600 font-medium mb-3">${project.tag}</p>
+                            <p class="text-gray-600 text-sm">${project.description}</p>
+                            <div class="mt-4 flex flex-wrap gap-2">
+                                ${project.technologies.map(tech =>
+                        `<span class="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded-full">${tech}</span>`
+                    ).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            updateTestimonials(translations) {
+                const testimonialsContainer = document.getElementById('testimonials-container');
+                if (!testimonialsContainer || !translations.testimonials || !translations.testimonials.items) return;
+
+                const testimonialAvatars = [
+                    './john-doe-avatar.svg',
+                    './maria-garcia-avatar.svg',
+                    './ahmed-hassan-avatar.svg'
+                ];
+
+                const gradientColors = [
+                    'from-purple-500 to-pink-400',
+                    'from-pink-500 to-yellow-400',
+                    'from-yellow-400 to-purple-400'
+                ];
+
+                const borderColors = [
+                    'border-purple-400',
+                    'border-pink-400',
+                    'border-yellow-400'
+                ];
+
+                testimonialsContainer.innerHTML = translations.testimonials.items.map((testimonial, index) => `
+                    <div class="testimonial-card p-8 rounded-2xl shadow-xl border border-white/20 flex flex-col items-center intersection-observer hover:scale-105 transition-transform duration-300">
+                        <div class="relative mb-4">
+                            <img src="${testimonialAvatars[index]}" alt="${testimonial.name}"
+                                class="w-16 h-16 rounded-full border-4 ${borderColors[index]} shadow-lg">
+                            <span class="absolute -bottom-2 -right-2 bg-gradient-to-br ${gradientColors[index]} text-white rounded-full p-2 shadow-md">
+                                <i class="fas fa-quote-left"></i>
+                            </span>
+                        </div>
+                        <p class="text-lg text-purple-100 mb-6 text-center italic">
+                            "${testimonial.quote}"
+                        </p>
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="font-semibold text-white">${testimonial.name}</span>
+                            <span class="text-purple-200 text-xs px-2 py-1 rounded-full bg-white/10">${testimonial.role}</span>
+                        </div>
+                        <div class="flex text-yellow-400 mb-1">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            getNestedProperty(obj, path) {
+                return path.split('.').reduce((current, key) => {
+                    return current && current[key] !== undefined ? current[key] : null;
+                }, obj);
+            }
+
+            showLoading() {
+                this.loadingOverlay.style.display = 'flex';
+            }
+
+            hideLoading() {
+                this.loadingOverlay.style.display = 'none';
+            }
+        }
+
+        // Initialize localization when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            window.localizationManager = new LocalizationManager();
+        });
+
+        // Existing JavaScript code continues here...
+
         // Intersection Observer for animations
         const observerOptions = {
             threshold: 0.1,
@@ -1330,40 +2116,34 @@
             });
         });
 
-        // Newsletter form submission
+        // Contact form submission
         document.querySelector('form').addEventListener('submit', function (e) {
             e.preventDefault();
-            const email = this.querySelector('input[type="email"]').value;
-            if (email) {
-                // Show success message
-                const button = this.querySelector('button');
-                const originalText = button.textContent;
-                button.textContent = 'Subscribed!';
-                button.classList.add('bg-green-600');
-                button.classList.remove('bg-purple-600');
+            const submitButton = this.querySelector('button[type="submit"]');
+            const submitText = submitButton.querySelector('span[data-i18n="contact.form.submit_button"]');
+            const originalText = submitText.textContent;
 
-                setTimeout(() => {
-                    button.textContent = originalText;
-                    button.classList.remove('bg-green-600');
-                    button.classList.add('bg-purple-600');
-                    this.reset();
-                }, 2000);
-            }
+            // Get current language
+            const currentLang = window.localizationManager ? window.localizationManager.currentLanguage : 'en';
+            const successText = currentLang === 'ja' ? '送信されました!' : 'Message Sent!';
+
+            // Show success message
+            submitText.textContent = successText;
+            submitButton.classList.add('bg-green-600');
+            submitButton.classList.remove('bg-gradient-to-r', 'from-indigo-500', 'via-purple-600', 'to-pink-500');
+
+            setTimeout(() => {
+                submitText.textContent = originalText;
+                submitButton.classList.remove('bg-green-600');
+                submitButton.classList.add('bg-gradient-to-r', 'from-indigo-500', 'via-purple-600', 'to-pink-500');
+                this.reset();
+            }, 2000);
         });
 
         // Add loading animation to page
         window.addEventListener('load', () => {
             document.body.classList.add('loaded');
         });
-
-        // Mobile menu toggle (if needed)
-        const mobileMenuButton = document.querySelector('.md\\:hidden button');
-        if (mobileMenuButton) {
-            mobileMenuButton.addEventListener('click', function () {
-                // Add mobile menu functionality here
-                console.log('Mobile menu clicked');
-            });
-        }
 
         // Add some interactive elements
         document.querySelectorAll('.value-card').forEach(card => {
@@ -1381,7 +2161,39 @@
                 // Allow default behavior for social links to work properly
                 const platform = this.querySelector('i').classList[1].split('-')[1];
                 // Add analytics tracking here if needed
+                console.log(`Social link clicked: ${platform}`);
             });
+        });
+
+        // Keyboard navigation for language toggle
+        document.addEventListener('keydown', function (e) {
+            if (e.altKey && e.key === 'l') {
+                e.preventDefault();
+                const currentLang = window.localizationManager ? window.localizationManager.currentLanguage : 'en';
+                const newLang = currentLang === 'en' ? 'ja' : 'en';
+                if (window.localizationManager) {
+                    window.localizationManager.changeLanguage(newLang);
+                }
+            }
+        });
+
+        // Add accessibility improvements
+        document.querySelectorAll('.language-btn').forEach(btn => {
+            btn.setAttribute('aria-label', `Switch to ${btn.textContent} language`);
+        });
+
+        // Add focus management for better accessibility
+        document.addEventListener('focusin', function (e) {
+            if (e.target.matches('.language-btn')) {
+                e.target.style.outline = '2px solid #667eea';
+                e.target.style.outlineOffset = '2px';
+            }
+        });
+
+        document.addEventListener('focusout', function (e) {
+            if (e.target.matches('.language-btn')) {
+                e.target.style.outline = 'none';
+            }
         });
     </script>
 </body>
